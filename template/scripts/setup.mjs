@@ -24,5 +24,5 @@ const setupCodePush = () => {
 (() => {
   const [arg] = getArguments();
   if (arg === 'codepush') setupCodePush();
-  execScriptSync('git init && yarn prepare && yarn postinstall');
+  execScriptSync('yarn && git init');
 })();

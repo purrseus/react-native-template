@@ -1,7 +1,7 @@
-import inquirer from 'inquirer';
 import {
   commands,
   createBuildQuestionCollections,
+  createQuestions,
   execScriptSync,
   getArguments,
   platformBuildTypes,
@@ -23,7 +23,7 @@ import {
     return;
   }
 
-  const { env, buildType } = await inquirer.prompt(createBuildQuestionCollections('ios'));
+  const { env, buildType } = await createQuestions(createBuildQuestionCollections('ios'));
 
   if (platformBuildTypes.ios.includes(buildType)) {
     openXCode();

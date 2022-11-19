@@ -46,7 +46,9 @@ export const execScriptSync = command => execSync(command, { stdio: 'inherit' })
 
 export const createQuestions = async questions => {
   const answers = await inquirer.prompt(questions);
-  if (answers.env) ensureGitBranch(answers.env);
+  const isCodePush = !answers.buildType && !!answers.env;
+  const isReleaseBuildType = !!answers.buildType && answers.buildType !== 'Debug';
+  if (isReleaseBuildType || isCodePush) ensureGitBranch(answers.env);
   return answers;
 };
 

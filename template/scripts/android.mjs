@@ -1,7 +1,7 @@
-import inquirer from 'inquirer';
 import {
   commands,
   createBuildQuestionCollections,
+  createQuestions,
   execScriptSync,
   platformBuildTypes,
   uncapitalized,
@@ -19,7 +19,7 @@ import {
     Production: '',
   };
 
-  const { env, buildType } = await inquirer.prompt(createBuildQuestionCollections('android'));
+  const { env, buildType } = await createQuestions(createBuildQuestionCollections('android'));
 
   if (platformBuildTypes.android.includes(buildType)) {
     execScriptSync(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));

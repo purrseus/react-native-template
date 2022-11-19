@@ -101,6 +101,10 @@
 │   │   │   ├── BottomSheet
 │   │   │   │   ├── ActionSheet.tsx
 │   │   │   │   └── BottomSheet.tsx
+│   │   │   ├── Form
+│   │   │   │   ├── Checkboxes.tsx
+│   │   │   │   ├── Field.tsx
+│   │   │   │   └── TextInput.tsx
 │   │   │   ├── Image
 │   │   │   │   ├── Icon.tsx
 │   │   │   │   └── Image.tsx
@@ -138,10 +142,6 @@
 │   │   │   │   │       ├── IconTextInput.tsx
 │   │   │   │   │       └── TextInput.tsx
 │   │   │   │   └── Text.tsx
-│   │   │   ├── form
-│   │   │   │   ├── Checkboxes.tsx
-│   │   │   │   ├── Field.tsx
-│   │   │   │   └── TextInput.tsx
 │   │   │   └── index.ts
 │   │   └── custom
 │   │       ├── NavigationHeader.tsx

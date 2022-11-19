@@ -1,4 +1,5 @@
 # Scripts
+
 - [setup](#setup)
 - [android](#android)
 - [ios](#ios)
@@ -16,19 +17,15 @@
 ## setup
 
 ```sh
-$ npm run setup
-# --- or ---
-$ yarn setup
+yarn setup
 ```
 
-It will run all the necessary scripts for your project. You need to run it right after initializing the project
+It will run all the necessary scripts for your project. You need to run it as soon as right after initializing the project.
 
 ## android
 
 ```sh
-$ npm run android
-# --- or ---
-$ yarn android
+yarn android
 ```
 
 Builds your app and starts it on a connected Android emulator or device.
@@ -36,9 +33,7 @@ Builds your app and starts it on a connected Android emulator or device.
 ## ios
 
 ```sh
-$ npm run ios
-# --- or ---
-$ yarn ios
+yarn ios
 ```
 
 Builds your app and starts it on iOS simulator.
@@ -46,9 +41,7 @@ Builds your app and starts it on iOS simulator.
 ## start
 
 ```sh
-$ npm run start
-# --- or ---
-$ yarn start
+yarn start
 ```
 
 Starts the server that communicates with connected devices.
@@ -56,9 +49,7 @@ Starts the server that communicates with connected devices.
 ## xcode
 
 ```sh
-$ npm run xcode
-# --- or ---
-$ yarn xcode
+yarn xcode
 ```
 
 It will open the `xcworkspace` in XCode.
@@ -66,9 +57,7 @@ It will open the `xcworkspace` in XCode.
 ## code-push
 
 ```sh
-$ npm run code-push
-# --- or ---
-$ yarn code-push
+yarn code-push
 ```
 
 It will release the update to the CodePush server.
@@ -76,9 +65,7 @@ It will release the update to the CodePush server.
 ## generate
 
 ```sh
-$ npm run generate [folder_name] [target_dir]
-# --- or ---
-$ yarn generate [folder_name] [target_dir]
+yarn generate [folder_name] [target_dir]
 ```
 
 It will create a template folder with name is `folder_name` in the `target_dir`. By default, `target_dir` is `src/features`.
@@ -86,9 +73,7 @@ It will create a template folder with name is `folder_name` in the `target_dir`.
 ## lint
 
 ```sh
-$ npm run lint
-# --- or ---
-$ yarn lint
+yarn lint
 ```
 
 It will find and fix problems in your project.
@@ -96,9 +81,7 @@ It will find and fix problems in your project.
 ## format
 
 ```sh
-$ npm run format
-# --- or ---
-$ yarn format
+yarn format
 ```
 
 It will format all files supported by Prettier in your project.
@@ -106,9 +89,7 @@ It will format all files supported by Prettier in your project.
 ## commit
 
 ```sh
-$ npm run commit
-# --- or ---
-$ yarn commit
+yarn commit
 ```
 
 It will create the prompts needed to start a commit.
@@ -116,9 +97,7 @@ It will create the prompts needed to start a commit.
 ## test
 
 ```sh
-$ npm run test
-# --- or ---
-$ yarn test
+yarn test
 ```
 
 It will run all of the test cases.
@@ -133,4 +112,4 @@ These are the set of tasks which will run after every dependency installation. T
 
 ## prepare
 
-It will automatically have Git hooks enabled after install
+It will automatically have Git hooks enabled after install.

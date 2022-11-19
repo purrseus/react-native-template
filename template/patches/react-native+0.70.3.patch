@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native/scripts/cocoapods/flipper.rb b/node_modules/react-native/scripts/cocoapods/flipper.rb
+index e2bfe76..e8edf41 100644
+--- a/node_modules/react-native/scripts/cocoapods/flipper.rb
++++ b/node_modules/react-native/scripts/cocoapods/flipper.rb
+@@ -83,7 +83,7 @@ def flipper_post_install(installer)
+         # Enable flipper for React-Core Debug configuration
+         if target.name == 'React-Core'
+             target.build_configurations.each do |config|
+-                if config.name == 'Debug'
++                if config.name.include? 'Debug'
+                     config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = ['$(inherited)', 'FB_SONARKIT_ENABLED=1']
+                 end
+             end

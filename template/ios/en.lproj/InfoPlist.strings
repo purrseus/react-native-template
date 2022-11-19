@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  ReactNativeLab
+
+  Created by Thien Do on 22/05/2022.
+  
+*/
+NSLocationWhenInUseUsageDescription = "NSLocationWhenInUseUsageDescription English";
+NSCameraUsageDescription = "NSCameraUsageDescription English";
+NSPhotoLibraryAddUsageDescription = "NSPhotoLibraryAddUsageDescription English";
+NSPhotoLibraryUsageDescription = "NSPhotoLibraryUsageDescription English";

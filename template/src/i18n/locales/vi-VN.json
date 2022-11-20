@@ -1,0 +1,25 @@
+{
+  "common": {
+    "cancel": "Hủy",
+    "confirm": "Xác nhận"
+  },
+  "permission": {
+    "camera": "Máy Ảnh",
+    "photoGallery": "Thư Viện Ảnh",
+    "blockedTitle": "Quyền Truy Cập {{permissionName}} Đã Bị Chặn",
+    "blockedMessage": "Vui lòng cấp quyền từ màn hình cài đặt để sử dụng tính năng này",
+    "unavailableTitle": "Tính năng này không khả dụng trên thiết bị của bạn",
+    "openSettings": "Cài đặt"
+  },
+  "tab": {
+    "home": "Trang chủ",
+    "messages": "Tin nhắn",
+    "notification": "Thông báo",
+    "profile": "Trang cá nhân"
+  },
+  "imagePicker": {
+    "takePhoto": "Chụp ảnh",
+    "chooseFromLibrary": "Chọn ảnh từ Thư viện",
+    "cancel": "Hủy"
+  }
+}

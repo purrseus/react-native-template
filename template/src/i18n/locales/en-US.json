@@ -1,0 +1,25 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "permission": {
+    "camera": "Camera",
+    "photoGallery": "Photo Gallery",
+    "blockedTitle": "{{permissionName}} Permission Blocked",
+    "blockedMessage": "Please allow permission from settings screen to use this feature",
+    "unavailableTitle": "This feature is not available on your device",
+    "openSettings": "Settings"
+  },
+  "tab": {
+    "home": "Home",
+    "messages": "Messages",
+    "notification": "Notification",
+    "profile": "Profile"
+  },
+  "imagePicker": {
+    "takePhoto": "Take Photo...",
+    "chooseFromLibrary": "Choose from Library...",
+    "cancel": "Cancel"
+  }
+}

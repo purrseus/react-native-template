@@ -1,0 +1,24 @@
+{
+  "name": "@purrseus/react-native-template",
+  "version": "0.1.0",
+  "description": "Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiendo261/react-native-template.git"
+  },
+  "keywords": [
+    "react-native",
+    "typescript",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Thiện Đỗ <thiendo3831@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thiendo261/react-native-template/issues"
+  },
+  "homepage": "https://github.com/thiendo261/react-native-template#readme"
+}

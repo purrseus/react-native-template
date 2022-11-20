@@ -1,5 +1,17 @@
 # :seedling: React Native Template
 
+<p>
+  <a href="https://www.npmjs.com/package/@purrseus/react-native-template">
+    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?label=%40purrseus%2Freact-native-template&logo=npm&style=flat-square">
+  </a>
+  <a href="https://github.com/thiendo261/react-native-template#readme">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square" />
+  </a>
+  <a href="https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/thiendo261/react-native-template.svg?style=flat-square">
+  </a>
+</p>
+
 > Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app.
 
 ## :bookmark: Table Of Contents
@@ -93,3 +105,10 @@ See [Available Scripts](./docs/scripts.md).
 ## :page_facing_up: License
 
 This project is [MIT](./LICENSE) licensed.
+
+## :sparkles: Donate
+
+<br/>
+<a href="https://www.buymeacoffee.com/thiendo261" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>

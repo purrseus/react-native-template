@@ -1,7 +1,7 @@
 # Project Structure
 
 ```
-.
+root
 ├── .bundle
 ├── .husky
 ├── __tests__

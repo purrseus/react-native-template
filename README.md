@@ -49,7 +49,8 @@ Make sure that you have followed the environment setup instructions properly fro
 npx react-native init MyApp --template @purrseus/react-native-template
 ```
 
-_:grey_exclamation: NOTE: If you having trouble with **iOS**, go to your project directory and try to reinstall the dependencies by running:_
+> **Note**
+> If you having trouble with **iOS**, go to your project directory and try to reinstall the dependencies by running:
 
 ```sh
 bundle install
@@ -70,9 +71,9 @@ _If you don't use CodePush, you can skip this setup guide._
 
 1. Open up `scripts/utils.mjs`, replace `APP_CENTER_OWNER_NAME` value with your owner name, and replace `appCenterAppName` values with your app names.
 
-2. Add **App Secret Key** and **Code Push Deployment Key** into **AppCenter** variables in your `environments/.env.*` files.
+2. Add **App Secret Key** and **Code Push Deployment Key** into AppCenter variables in your `environments/.env.*` files.
 
-3. Run this command to create **AppCenter config file** for both platform directories:
+3. Run this command to create AppCenter config file for both platform directories:
 
 ```sh
 yarn setup codepush
@@ -83,10 +84,12 @@ yarn setup codepush
 1. Go to `android/app`, generate a keystore file:
 
 ```sh
-sudo keytool -genkey -v -keystore development.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 # replace development for your environment
+sudo keytool -genkey -v -keystore development.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+# replace development for your environment, and replace my-key-alias for your alias
 ```
 
-**_:warning: WARNING: If you build android app in a specific environment without corresponding keystore, you will get a error that you are missing a keystore._**
+> **Warning**
+> If you build android app in a specific environment without corresponding keystore, you will get a error that you are missing a keystore.
 
 2. In `environments/.env.*` files, edit `ANDROID_STORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` values to your selected values in the keystore file.
 
@@ -108,7 +111,6 @@ This project is [MIT](./LICENSE) licensed.
 
 ## :sparkles: Donate
 
-<br/>
 <a href="https://www.buymeacoffee.com/thiendo261" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
 </a>

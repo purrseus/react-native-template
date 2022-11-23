@@ -91,7 +91,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
           try {
             const result = await selectOptions[buttonIndex](imageOptions);
             if (!result?.assets?.length) {
-              throw result;
+              throw new Error(JSON.stringify(result));
             } else {
               const [{ uri, fileName: name, type }] = result.assets;
               if (!uri || !type || !name) throw '';

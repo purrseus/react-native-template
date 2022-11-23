@@ -28,14 +28,14 @@ const _List = (
       let id = '';
 
       for (const key in item) {
-        const shorterId = !!id.length && key.length < id.length;
+        const shorterId = !id.isEmpty && key.length < id.length;
 
-        if (key.match(/id/gi) && (shorterId || !id.length)) {
+        if (key.match(/id/gi) && (shorterId || id.isEmpty)) {
           id = key;
         }
       }
 
-      if (id.length) {
+      if (!id.isEmpty) {
         keyRef.current = id;
         return `${item[id]}`;
       }

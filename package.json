@@ -1,6 +1,6 @@
 {
   "name": "@purrseus/react-native-template",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

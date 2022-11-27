@@ -13,9 +13,7 @@ const store = configureStore({
       },
     });
 
-    if (__DEV__) middlewareArray.prepend(createDebugger());
-
-    return middlewareArray;
+    return __DEV__ ? middlewareArray.prepend(createDebugger()) : middlewareArray;
   },
   devTools: __DEV__,
 });

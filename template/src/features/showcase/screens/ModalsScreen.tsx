@@ -58,7 +58,7 @@ const ModalsScreen = withHook(
 
             <Spacer h={16} />
 
-            <Button title="Dismiss modal" onPress={dismissModal} />
+            <Button title="Dismiss modal" onPress={dismissBottomModal} />
             <Spacer h={bottomModalSafeArea} />
           </View>
         </Modal>

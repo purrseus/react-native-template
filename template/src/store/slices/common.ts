@@ -1,6 +1,6 @@
 import { Language } from '@core/types';
 import i18n from '@i18n';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createPersistReducer, getCurrentLanguage } from '@utilities';
 import { REHYDRATE } from 'redux-persist';
 
@@ -12,6 +12,8 @@ interface CommonState {
 }
 
 const SLICE_NAME = 'common';
+
+const rehydrateAction = createAction<Partial<CommonState> | undefined>(REHYDRATE);
 
 const initialState: CommonState = {
   language: getCurrentLanguage(),
@@ -30,12 +32,10 @@ const commonSlice = createSlice({
       state.theme = payload;
     },
   },
-  extraReducers: {
-    [REHYDRATE]: (_, { payload }: PayloadAction<Partial<CommonState> | undefined>) => {
-      if (payload?.language) {
-        i18n.changeLanguage(payload.language);
-      }
-    },
+  extraReducers: builder => {
+    builder.addCase(rehydrateAction, (_, { payload }) => {
+      if (payload?.language) i18n.changeLanguage(payload.language);
+    });
   },
 });
 

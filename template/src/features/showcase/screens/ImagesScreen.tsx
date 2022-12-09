@@ -13,7 +13,7 @@ const ImagesScreen = withHook(useImageContainer, ({ imageUrl }) => {
 
   return (
     <StackContainer
-      headerTitle={ProtectedScreenName.Images}
+      title={ProtectedScreenName.Images}
       wrapperType="scrollView"
       wrapperStyle={[globalStyles.flexCenter, styles.scrollView]}
     >

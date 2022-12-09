@@ -13,7 +13,7 @@ const UNAUTHORIZED_STATUS = 401;
 const promiseQueue: PromiseObj<string>[] = [];
 
 const handlePromiseQueue = async (accessToken?: string, error?: any) => {
-  if (!promiseQueue.length) return;
+  if (promiseQueue.isEmpty) return;
 
   for (const promise of promiseQueue) {
     if (accessToken && !error) {

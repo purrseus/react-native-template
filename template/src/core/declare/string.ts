@@ -6,6 +6,11 @@ Object.defineProperties(String.prototype, {
       return !this.trim().length;
     },
   },
+  isNotEmpty: {
+    get() {
+      return !!this.trim().length;
+    },
+  },
 });
 
 String.prototype.removeWhiteSpaces = function () {

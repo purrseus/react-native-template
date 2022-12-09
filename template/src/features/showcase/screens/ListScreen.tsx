@@ -6,7 +6,7 @@ import { useListContainer } from '../containers';
 
 const ListScreen = withHook(useListContainer, ({ renderItem, getPhotos, config }) => {
   return (
-    <StackContainer headerTitle={ProtectedScreenName.List}>
+    <StackContainer title={ProtectedScreenName.List}>
       <InfiniteList renderItem={renderItem} requestCallback={getPhotos} config={config} />
     </StackContainer>
   );

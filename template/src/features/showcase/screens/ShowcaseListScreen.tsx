@@ -12,7 +12,7 @@ const ShowcaseListScreen = withHook(
     const styles = useStyle(createStyles);
 
     return (
-      <StackContainer headerTitle={ProtectedScreenName.ShowcaseList}>
+      <StackContainer title={ProtectedScreenName.ShowcaseList}>
         <List
           data={data}
           renderItem={renderItem}

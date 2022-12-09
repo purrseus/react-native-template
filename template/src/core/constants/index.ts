@@ -13,13 +13,12 @@ export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
 
 //#region sizes
 export const TAB_BAR_HEIGHT = 70;
-export const HEADER_HEIGHT = 50;
+export const APP_BAR_HEIGHT = 50;
 export const DEFAULT_FONT_SIZE = 14;
 export const MIN_HEIGHT_INPUT = DEFAULT_FONT_SIZE + 6;
 export const MAX_HEIGHT_INPUT = 220;
 export const PADDING_VERTICAL_INPUT = 12;
 export const DEFAULT_ICON_SIZE = 24;
-export const DEFAULT_HEADER_ICON_SIZE = 24;
 export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
 export const DEFAULT_HIT_SLOP: Insets = { top: 8, bottom: 8, left: 8, right: 8 };
 //#endregion

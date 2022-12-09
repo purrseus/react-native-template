@@ -1,11 +1,7 @@
 import { icons } from '@assets';
 import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
-import {
-  DEFAULT_HEADER_ICON_SIZE,
-  DEFAULT_HORIZONTAL_EDGE_SPACING,
-  HEADER_HEIGHT,
-} from '@core/constants';
-import { HeaderAction, StyleCallbackParams } from '@core/interfaces';
+import { DEFAULT_HORIZONTAL_EDGE_SPACING, APP_BAR_HEIGHT } from '@core/constants';
+import { AppBarAction, StyleCallbackParams } from '@core/interfaces';
 import { useLayout, useStyle } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '@themes';
@@ -13,13 +9,15 @@ import { compareMemo, createShadow } from '@utilities';
 import { Fragment, useMemo } from 'react';
 import { StatusBar, View, ViewProps } from 'react-native';
 
-export interface NavigationHeaderProps extends ViewProps {
+export interface AppBarProps extends ViewProps {
   title: string;
-  rightActions?: HeaderAction[];
+  rightActions?: AppBarAction[];
   actionSeparatorWidth?: number;
 }
 
-const NavigationHeader = compareMemo<NavigationHeaderProps>(
+const DEFAULT_ICON_SIZE = 24;
+
+const AppBar = compareMemo<AppBarProps>(
   ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
     const styles = useStyle(createStyles);
     const { canGoBack, goBack } = useNavigation();
@@ -29,13 +27,13 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
 
     const RightActions = useMemo(
       () =>
-        rightActions.map(({ onPress, icon, size }: HeaderAction, index, array) => {
-          const showSpacerSeparator = index !== array.length - 1;
+        rightActions.map(({ onPress, icon, size }: AppBarAction, index, array) => {
+          const showSpacerSeparator = index !== array.lastIndex;
 
           return (
             <Fragment key={index}>
               <PressArea hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
-                <Icon source={icon} size={size || DEFAULT_HEADER_ICON_SIZE} />
+                <Icon source={icon} size={size || DEFAULT_ICON_SIZE} />
               </PressArea>
               {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
             </Fragment>
@@ -52,7 +50,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
           <Row style={[styles.sideWrapper, styles.leftWrapper(sideLayout.width)]}>
             {handleGoBack && (
               <PressArea hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
-                <Icon source={icons.header.back} size={DEFAULT_HEADER_ICON_SIZE} />
+                <Icon source={icons.appBar.back} size={DEFAULT_ICON_SIZE} />
               </PressArea>
             )}
           </Row>
@@ -64,7 +62,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
           </Row>
 
           <Row
-            onLayout={rightActions.length ? handleSideLayout : undefined}
+            onLayout={rightActions.isNotEmpty ? handleSideLayout : undefined}
             style={[styles.sideWrapper, styles.rightWrapper]}
           >
             {RightActions}
@@ -78,14 +76,14 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
 const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
   create({
     rootContainer: {
-      backgroundColor: colors.headerBackground,
+      backgroundColor: colors.appBarBackground,
       paddingTop: edgeInsets.top || StatusBar.currentHeight || 0,
       paddingLeft: edgeInsets.left,
       paddingRight: edgeInsets.right,
       ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
     },
     safeAreaContainer: {
-      height: HEADER_HEIGHT,
+      height: APP_BAR_HEIGHT,
     },
     sideWrapper: {
       minWidth: '20%',
@@ -105,4 +103,4 @@ const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
     },
   });
 
-export default NavigationHeader;
+export default AppBar;

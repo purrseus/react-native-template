@@ -15,7 +15,7 @@ const PressableScreen = withHook(usePressableContainer, ({ isEnabled, onPress, i
   return (
     <StackContainer
       wrapperType="scrollView"
-      headerTitle={ProtectedScreenName.Pressable}
+      title={ProtectedScreenName.Pressable}
       wrapperStyle={styles.scrollView}
     >
       <Switch isEnabled={isEnabled} loading={isLoading} onPress={onPress} />
@@ -65,12 +65,12 @@ const PressableScreen = withHook(usePressableContainer, ({ isEnabled, onPress, i
       {/* Icon */}
       <Button title="Title with right icon" iconSpacing={8} iconRight={icons.bottomTab.home} />
       <Separator />
-      <Button title="Title with left icon" iconSpacing={8} iconLeft={icons.header.back} />
+      <Button title="Title with left icon" iconSpacing={8} iconLeft={icons.appBar.back} />
       <Separator />
       <Button
         title="Title with both icon"
         iconSpacing={8}
-        iconLeft={icons.header.back}
+        iconLeft={icons.appBar.back}
         iconRight={icons.bottomTab.home}
       />
       <Separator />

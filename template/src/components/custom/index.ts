@@ -1,2 +1,2 @@
-export { default as NavigationHeader } from './NavigationHeader';
+export { default as AppBar } from './AppBar';
 export { default as StackContainer } from './StackContainer';

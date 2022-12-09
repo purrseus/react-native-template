@@ -12,7 +12,7 @@ const FormScreen = withHook(useFormContainer, ({ formMethods, checkboxData, onSu
   const styles = useStyle(createStyles);
 
   return (
-    <StackContainer headerTitle={ProtectedScreenName.Form}>
+    <StackContainer title={ProtectedScreenName.Form}>
       <KeyboardAwareScrollView style={styles.scrollView}>
         <FormProvider {...formMethods}>
           <Field.TextInput name="firstName" label="firstName" containerStyle={styles.field} />

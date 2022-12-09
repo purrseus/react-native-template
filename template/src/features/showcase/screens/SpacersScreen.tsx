@@ -24,7 +24,7 @@ const SpacersScreen = withHook(
     const styles = useStyle(createStyles);
 
     return (
-      <StackContainer headerTitle={ProtectedScreenName.Spacers}>
+      <StackContainer title={ProtectedScreenName.Spacers}>
         <View style={[globalStyles.flexFillCenter, styles.container]}>
           <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={showWidthSpacer} />
           <Separator />

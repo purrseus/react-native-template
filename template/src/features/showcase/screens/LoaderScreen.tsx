@@ -7,10 +7,7 @@ import { useLoaderContainer } from '../containers';
 
 const LoaderScreen = withHook(useLoaderContainer, ({ handleOverlayLoading }) => {
   return (
-    <StackContainer
-      headerTitle={ProtectedScreenName.Loader}
-      wrapperStyle={globalStyles.flexFillCenter}
-    >
+    <StackContainer title={ProtectedScreenName.Loader} wrapperStyle={globalStyles.flexFillCenter}>
       <ShowcaseItem title="Show OverlayLoading in 3 seconds" onPress={handleOverlayLoading} />
     </StackContainer>
   );

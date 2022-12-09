@@ -77,7 +77,7 @@ const checkMultiplePermissions =
         .filter(([, value]) => value === RESULTS.DENIED)
         .map(([key]) => key as Permission);
 
-      if (deniedPermissions.length) {
+      if (deniedPermissions.isNotEmpty) {
         const requestedStatuses = await requestMultiple(deniedPermissions);
         Object.assign(permissionsStatuses, requestedStatuses);
       }

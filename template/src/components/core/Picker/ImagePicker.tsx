@@ -90,7 +90,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
 
           try {
             const result = await selectOptions[buttonIndex](imageOptions);
-            if (!result?.assets?.length) {
+            if (!result?.assets || result.assets.isEmpty) {
               throw new Error(JSON.stringify(result));
             } else {
               const [{ uri, fileName: name, type }] = result.assets;
@@ -131,7 +131,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
 
           const canNotPick = type === 'pick' && images.length >= maximumImages;
           const canNotReplace =
-            (type === 'replace' && !images.length) || (type === 'replace' && index === undefined);
+            (type === 'replace' && images.isEmpty) || (type === 'replace' && index === undefined);
           if (canNotReplace || canNotPick) return;
 
           pickType.current = type;
@@ -151,7 +151,8 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
             return;
           }
 
-          const canDeleteImage = !!images.length && deleteIndex >= 0 && deleteIndex < images.length;
+          const canDeleteImage =
+            images.isNotEmpty && deleteIndex >= 0 && deleteIndex < images.length;
           if (canDeleteImage) {
             onChangeImage(images.filter((_, i) => i !== deleteIndex));
           }

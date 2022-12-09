@@ -1,10 +1,6 @@
 import { icons } from '@assets';
 import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
-import {
-  DEFAULT_HEADER_ICON_SIZE,
-  DEFAULT_HORIZONTAL_EDGE_SPACING,
-  HEADER_HEIGHT,
-} from '@core/constants';
+import { DEFAULT_HORIZONTAL_EDGE_SPACING, HEADER_HEIGHT } from '@core/constants';
 import { HeaderAction, StyleCallbackParams } from '@core/interfaces';
 import { useLayout, useStyle } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +15,8 @@ export interface NavigationHeaderProps extends ViewProps {
   actionSeparatorWidth?: number;
 }
 
+const DEFAULT_HEADER_ICON_SIZE = 24;
+
 const NavigationHeader = compareMemo<NavigationHeaderProps>(
   ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
     const styles = useStyle(createStyles);
@@ -30,7 +28,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
     const RightActions = useMemo(
       () =>
         rightActions.map(({ onPress, icon, size }: HeaderAction, index, array) => {
-          const showSpacerSeparator = index !== array.length - 1;
+          const showSpacerSeparator = index !== array.lastIndex;
 
           return (
             <Fragment key={index}>
@@ -64,7 +62,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
           </Row>
 
           <Row
-            onLayout={rightActions.length ? handleSideLayout : undefined}
+            onLayout={rightActions.isNotEmpty ? handleSideLayout : undefined}
             style={[styles.sideWrapper, styles.rightWrapper]}
           >
             {RightActions}

@@ -11,7 +11,7 @@ const usePickerContainer = () => {
   const dateTimePickerRef = useRef<DateTimePickerMethods | null>(null);
 
   useEffect(() => {
-    if (images.length)
+    if (images.isNotEmpty)
       Alert(
         referenceTypeFormatter(typeof images.first !== 'string' ? images.first.uri : images.first),
       );

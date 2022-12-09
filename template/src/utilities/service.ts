@@ -13,7 +13,7 @@ const FILE_KEYS: (keyof File)[] = ['uri', 'name', 'type'];
 export const createFormData = (data: FormDataObject): FormData => {
   const formData = new FormData();
   const arrayData = Object.entries(data);
-  if (!arrayData.length) return formData;
+  if (arrayData.isEmpty) return formData;
 
   //#region form data helper
   const isFile = (param: any): param is File =>

@@ -28,7 +28,7 @@ const _List = (
       let id = '';
 
       for (const key in item) {
-        const shorterId = !id.isEmpty && key.length < id.length;
+        const shorterId = id.isNotEmpty && key.length < id.length;
 
         if (key.match(/id/gi) && (shorterId || id.isEmpty)) {
           id = key;

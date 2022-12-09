@@ -25,7 +25,7 @@ export const deepAccessObject = <T extends Record<string, any>, V>(
   target: T,
   keyArray: string[],
 ): T | V => {
-  if (!keyArray.length) return target;
+  if (keyArray.isEmpty) return target;
   return keyArray.reduce((object, key) => {
     if (!!object && typeof object === 'object' && key in object) return object[key];
     return object;

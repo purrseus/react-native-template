@@ -9,9 +9,9 @@ export const icons = {
     notificationFocused: require('@assets/icons/tabs/notification/notification-focused.png'),
     profileFocused: require('@assets/icons/tabs/profile/profile-focused.png'),
   },
-  header: {
-    back: require('@assets/icons/header/back.png'),
-    moreAction: require('@assets/icons/header/more-action.png'),
+  appBar: {
+    back: require('@assets/icons/app-bar/back.png'),
+    moreAction: require('@assets/icons/app-bar/more-action.png'),
   },
   checkbox: {
     tick: require('@assets/icons/checkbox/tick.png'),

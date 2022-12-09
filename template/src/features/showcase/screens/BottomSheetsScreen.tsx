@@ -24,7 +24,7 @@ const BottomSheetsScreen = withHook(
       <>
         <StackContainer
           wrapperType="scrollView"
-          headerTitle={ProtectedScreenName.BottomSheets}
+          title={ProtectedScreenName.BottomSheets}
           wrapperStyle={styles.scrollView}
         >
           <ShowcaseItem title="Show BottomSheet" onPress={showBottomSheet} />

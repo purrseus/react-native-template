@@ -27,7 +27,7 @@ const ModalsScreen = withHook(
     return (
       <>
         <StackContainer
-          headerTitle={ProtectedScreenName.Modals}
+          title={ProtectedScreenName.Modals}
           wrapperType="scrollView"
           wrapperStyle={globalStyles.flexFillCenter}
         >

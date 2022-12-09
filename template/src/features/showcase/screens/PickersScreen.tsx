@@ -23,7 +23,7 @@ const PickersScreen = withHook(
 
     return (
       <StackContainer
-        headerTitle={ProtectedScreenName.Pickers}
+        title={ProtectedScreenName.Pickers}
         wrapperType="scrollView"
         wrapperStyle={styles.scrollView}
       >

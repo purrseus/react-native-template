@@ -11,7 +11,7 @@ export interface CommonFieldProps<T = any> {
   onChangeText?: (text: T) => void;
 }
 
-export interface HeaderAction {
+export interface AppBarAction {
   icon: ImageRequireSource;
   size?: number;
   onPress: () => void;

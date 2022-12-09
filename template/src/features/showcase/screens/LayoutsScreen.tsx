@@ -9,7 +9,7 @@ const LayoutsScreen = () => {
 
   return (
     <StackContainer
-      headerTitle={ProtectedScreenName.Layouts}
+      title={ProtectedScreenName.Layouts}
       wrapperType="scrollView"
       wrapperStyle={styles.scrollView}
     >

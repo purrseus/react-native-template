@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://www.npmjs.com/package/@purrseus/react-native-template">
-    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?label=%40purrseus%2Freact-native-template&logo=npm&style=flat-square">
+    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm&style=flat-square">
   </a>
   <a href="https://github.com/thiendo261/react-native-template#readme">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square" />
@@ -18,8 +18,9 @@
 
 - [Key Features](#star2-key-features)
 - [Requirements](#grey_exclamation-requirements)
-- [Quick Start](#zap-quick-start)
+- [Usage](#zap-usage)
 - [Setup](#gear-setup)
+- [Troubleshooting](#hammer_and_wrench-troubleshooting)
 - [Project Structure](#deciduous_tree-project-structure)
 - [Scripts](#page_with_curl-scripts)
 - [License](#page_facing_up-license)
@@ -43,18 +44,10 @@
 
 Make sure that you have followed the environment setup instructions properly from the official [React Native docs](https://reactnative.dev/docs/environment-setup).
 
-## :zap: Quick Start
+## :zap: Usage
 
 ```sh
 npx react-native init MyApp --template @purrseus/react-native-template
-```
-
-> **Note**
-> If you having trouble with **iOS**, go to your project directory and try to reinstall the dependencies by running:
-
-```sh
-bundle install
-cd ios && bundle exec pod install
 ```
 
 ## :gear: Setup
@@ -96,6 +89,18 @@ sudo keytool -genkey -v -keystore development.keystore -alias my-key-alias -keya
 ### iOS Setup:
 
 No additional steps are necessary.
+
+## :hammer_and_wrench: Troubleshooting
+
+_Once again, make sure that you have followed the environment setup instructions properly from the official._
+
+### Problems with Ruby versions
+
+This error seems to originate from the CLI, it has problems comparing between the global Ruby version on your local machine and the Ruby version requested in the [Gemfile](./template/Gemfile) file. To fix this error, try to reinstall the dependencies following the steps below:
+
+1. `cd <project-name>` to navigate to your RN project.
+2. `bundle install` to install Bundler
+3. `cd ios && bundle exec pod install` to install the iOS dependencies.
 
 ## :deciduous_tree: Project Structure
 

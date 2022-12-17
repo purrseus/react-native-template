@@ -8,6 +8,7 @@
 - [code-push](#code-push)
 - [generate](#generate)
 - [lint](#lint)
+- [lint:fix](#lintfix)
 - [format](#format)
 - [commit](#commit)
 - [test](#test)
@@ -74,6 +75,14 @@ It will create a template folder with name is `folder_name` in the `target_dir`.
 
 ```sh
 yarn lint
+```
+
+It will find problems in your project.
+
+## lint:fix
+
+```sh
+yarn lint:fix
 ```
 
 It will find and fix problems in your project.

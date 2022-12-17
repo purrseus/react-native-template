@@ -32,8 +32,8 @@ export const compareMemo = <T, P = undefined>(
 export const createField = <R, P extends CommonFieldProps>(
   Component: ForwardRefRenderFunction<R, P>,
   isTextInput: boolean = false,
-) => {
-  return memo(
+) =>
+  memo(
     forwardRef<R, P>((props, ref) => {
       const { control } = useFormContext();
 
@@ -66,4 +66,3 @@ export const createField = <R, P extends CommonFieldProps>(
     }),
     isEqual,
   );
-};

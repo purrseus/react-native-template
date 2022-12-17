@@ -9,22 +9,25 @@ import {
 } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
+import { StyleCallbackParams } from '@core/interfaces';
+import { useStyle } from '@hooks';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 
 const TextsScreen = () => {
   const { t } = useTranslation();
+  const styles = useStyle(createStyles);
 
   return (
     <StackContainer title={ProtectedScreenName.Texts}>
-      <KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
+      <KeyboardAwareScrollView style={styles.keyboardView}>
         <Text>Normal text</Text>
         <Text>Locale text: {t('common.cancel')}</Text>
 
         <Separator />
 
         <Text>SinglelineTextInput</Text>
-        <TextInput style={{ borderWidth: 1, width: '100%' }} />
+        <TextInput style={styles.singlelineTextInput} />
 
         <Separator />
 
@@ -54,7 +57,10 @@ const TextsScreen = () => {
         <Separator />
 
         <Text>MultilineTextInput</Text>
-        <MultilineTextInput placeholder="MultilineTextInput" containerStyle={{ width: '100%' }} />
+        <MultilineTextInput
+          placeholder="MultilineTextInput"
+          containerStyle={styles.multilineTextInput}
+        />
 
         <Separator />
 
@@ -62,11 +68,28 @@ const TextsScreen = () => {
         <MultilineTextInput
           dynamicHeight
           placeholder="MultilineTextInput"
-          containerStyle={{ width: '100%' }}
+          containerStyle={styles.dynamicHeightMultilineTextInput}
         />
       </KeyboardAwareScrollView>
     </StackContainer>
   );
 };
+
+const createStyles = ({ create }: StyleCallbackParams) =>
+  create({
+    keyboardView: {
+      paddingHorizontal: 16,
+    },
+    singlelineTextInput: {
+      borderWidth: 1,
+      width: '100%',
+    },
+    multilineTextInput: {
+      width: '100%',
+    },
+    dynamicHeightMultilineTextInput: {
+      width: '100%',
+    },
+  });
 
 export default TextsScreen;

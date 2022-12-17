@@ -5,7 +5,7 @@ import { LinearGradientProps } from 'react-native-linear-gradient';
 import { Edge } from 'react-native-safe-area-context';
 
 export const ONE_SECOND = 1000;
-export const HORIZONTAL_SAFETY_EDGES: Edge[] = ['left', 'right'];
+export const HORIZONTAL_SAFETY_EDGES: ReadonlyArray<Edge> = ['left', 'right'];
 export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
   leading: true,
   trailing: false,
@@ -20,7 +20,7 @@ export const MAX_HEIGHT_INPUT = 220;
 export const PADDING_VERTICAL_INPUT = 12;
 export const DEFAULT_ICON_SIZE = 24;
 export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
-export const DEFAULT_HIT_SLOP: Insets = { top: 8, bottom: 8, left: 8, right: 8 };
+export const DEFAULT_HIT_SLOP: Readonly<Insets> = { top: 8, bottom: 8, left: 8, right: 8 };
 //#endregion
 
 //#region formats

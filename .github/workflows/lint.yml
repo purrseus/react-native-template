@@ -1,0 +1,24 @@
+name: lint & typescript check
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./template
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Install dependencies
+        run: |
+          npm pkg delete scripts.postinstall scripts.prepare
+          npm install
+      - run: mv _eslintrc.js .eslintrc.js && mv _prettierrc.js .prettierrc.js
+      - name: Lint code
+        run: yarn lint

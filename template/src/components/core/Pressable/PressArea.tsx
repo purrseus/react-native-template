@@ -1,5 +1,4 @@
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle, useThrottle } from '@hooks';
+import { useThrottle } from '@hooks';
 import { compareMemo, duration } from '@utilities';
 import { forwardRef, useCallback } from 'react';
 import {
@@ -21,14 +20,11 @@ export interface PressAreaProps extends PressableProps {
 const PressArea = compareMemo<View, PressAreaProps>(
   forwardRef(
     ({ throttle = duration({ seconds: 0.5 }), onPress, pressInStyle, style, ...props }, ref) => {
-      const styles = useStyle(createStyles);
-
       const handleOnPress = useThrottle(onPress || (() => null), [onPress], throttle);
 
       const handleStateStyle = useCallback(
-        ({ pressed }: PressableStateCallbackType) =>
-          pressed ? [style, [styles.pressed, pressInStyle]] : style,
-        [style, pressInStyle, styles.pressed],
+        ({ pressed }: PressableStateCallbackType) => [style, pressed && pressInStyle],
+        [style, pressInStyle],
       );
 
       return (
@@ -45,12 +41,5 @@ const PressArea = compareMemo<View, PressAreaProps>(
     },
   ),
 );
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    pressed: {
-      opacity: 0.8,
-    },
-  });
 
 export default PressArea;

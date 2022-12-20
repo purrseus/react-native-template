@@ -23,6 +23,11 @@ const setupCodePush = () => {
 
 (() => {
   const [arg] = getArguments();
-  if (arg === 'codepush') setupCodePush();
-  execScriptSync('yarn && git init');
+  if (arg === 'code-push') {
+    setupCodePush();
+    return;
+  }
+  execScriptSync(
+    'yarn && git init && git branch -m main && git add . && git commit -m "Initial commit" -n',
+  );
 })();

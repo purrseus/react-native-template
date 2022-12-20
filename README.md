@@ -1,14 +1,17 @@
 # :seedling: React Native Template
 
 <p>
+  <a href="#seedling-react-native-template">
+    <img alt="Build" src="https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml/badge.svg">
+  </a>
   <a href="https://www.npmjs.com/package/@purrseus/react-native-template">
-    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm&style=flat-square">
+    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm">
   </a>
   <a href="https://github.com/thiendo261/react-native-template#readme">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE">
-    <img alt="GitHub" src="https://img.shields.io/github/license/thiendo261/react-native-template.svg?style=flat-square">
+    <img alt="License" src="https://img.shields.io/github/license/thiendo261/react-native-template.svg">
   </a>
 </p>
 
@@ -69,7 +72,7 @@ _If you don't use CodePush, you can skip this setup guide._
 3. Run this command to create AppCenter config file for both platform directories:
 
 ```sh
-yarn setup codepush
+yarn setup:code-push
 ```
 
 ### Android Setup:

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "setup": "node scripts/setup.mjs",
+    "setup:code-push": "node scripts/setup.mjs code-push",
     "android": "node scripts/android.mjs",
     "ios": "node scripts/ios.mjs",
     "start": "react-native start --reset-cache",

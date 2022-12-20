@@ -1,6 +1,7 @@
 # Scripts
 
 - [setup](#setup)
+- [setup:code-push](#setupcode-push)
 - [android](#android)
 - [ios](#ios)
 - [start](#start)
@@ -22,6 +23,14 @@ yarn setup
 ```
 
 It will run all the necessary scripts for your project. You need to run it as soon as right after initializing the project.
+
+## setup:code-push
+
+```sh
+yarn setup:code-push
+```
+
+It will create/update code push configuration files for your project.
 
 ## android
 

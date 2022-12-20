@@ -1,11 +1,11 @@
-name: npm publish
+name: build
 
 on:
   release:
     types: [created]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

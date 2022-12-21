@@ -95,7 +95,7 @@ No additional steps are necessary.
 
 ## :hammer_and_wrench: Troubleshooting
 
-_Once again, make sure that you have followed the environment setup instructions properly from the official._
+_Once again, make sure that you have followed the environment setup instructions properly from the official docs._
 
 ### Problems with Ruby versions
 

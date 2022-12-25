@@ -12,7 +12,6 @@ import {
   requestMultiple,
   RESULTS,
 } from 'react-native-permissions';
-import { logger } from './logger';
 
 const ALLOWED_STATUSES: PermissionStatus[] = [RESULTS.GRANTED, RESULTS.LIMITED];
 const { ANDROID, IOS } = PERMISSIONS;

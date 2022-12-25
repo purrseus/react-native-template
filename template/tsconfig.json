@@ -15,7 +15,7 @@
       "@hooks/*": ["hooks/*"],
       "@i18n/*": ["i18n/*"],
       "@layouts/*": ["layouts/*"],
-      "@navigation/*": ["navigation/*"],
+      "@navigators/*": ["navigators/*"],
       "@providers/*": ["providers/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],

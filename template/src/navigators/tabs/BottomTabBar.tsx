@@ -7,8 +7,8 @@ import {
   ProfileScreen,
 } from '@features/tab/screens';
 import { useStyle } from '@hooks';
-import { tabScreenOptions } from '@navigation/options';
-import createStyles from '@navigation/styles';
+import { tabScreenOptions } from '@navigators/options';
+import createStyles from '@navigators/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomizedTabBar from './CustomizedTabBar';
 

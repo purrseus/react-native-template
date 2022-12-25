@@ -1,12 +1,7 @@
 import { ActionSheetMethods, File, ImagePickerMethods } from '@core/interfaces';
 import { PickedImageType } from '@core/types';
 import { useAppTranslation } from '@hooks';
-import {
-  checkCameraPermission,
-  checkPhotoGalleryPermissions,
-  compareMemo,
-  logger,
-} from '@utilities';
+import { checkCameraPermission, checkPhotoGalleryPermissions, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import {
   CameraOptions,

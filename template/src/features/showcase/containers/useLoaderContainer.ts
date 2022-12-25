@@ -1,4 +1,4 @@
-import { duration, overlayLoading, wait } from '@utilities';
+import { overlayLoading } from '@utilities';
 
 const useLoaderContainer = () => {
   const handleOverlayLoading = async () => {

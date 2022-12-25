@@ -4,7 +4,7 @@ import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { logger, withHook } from '@utilities';
+import { withHook } from '@utilities';
 import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 

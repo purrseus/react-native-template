@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InfiniteScrollConfig, PaginationResponse } from '@core/interfaces';
-import { deepAccessObject, logger } from '@utilities';
+import { deepAccessObject } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
 import { Draft } from 'immer';
 import { useCallback, useEffect, useRef } from 'react';

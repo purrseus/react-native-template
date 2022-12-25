@@ -1,4 +1,3 @@
-import { wait } from '@utilities';
 import { useState } from 'react';
 
 const usePressableContainer = () => {
@@ -9,7 +8,7 @@ const usePressableContainer = () => {
     setIsLoading(true);
     setIsEnabled(value);
     try {
-      await wait(500);
+      await wait(duration({ seconds: 0.5 }));
       throw new Error('test');
     } catch (error) {
       setIsEnabled(!value);

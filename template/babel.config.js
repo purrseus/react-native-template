@@ -14,7 +14,7 @@ module.exports = {
           '@hooks': './src/hooks',
           '@i18n': './src/i18n',
           '@layouts': './src/layouts',
-          '@navigation': './src/navigation',
+          '@navigators': './src/navigators',
           '@providers': './src/providers',
           '@services': './src/services',
           '@store': './src/store',

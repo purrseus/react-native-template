@@ -10,30 +10,30 @@ type FormDataObject = Record<
 const FILE_PREFIX = 'file://';
 const FILE_KEYS: (keyof File)[] = ['uri', 'name', 'type'];
 
+//#region form data helper
+const isFile = (param: any): param is File =>
+  typeof param === 'object' && FILE_KEYS.every(fileKey => fileKey in param);
+
+const platformFile = (file: File): File => ({
+  ...file,
+  uri: Platform.select({ android: file.uri, ios: file.uri.replace(FILE_PREFIX, '') }) || '',
+});
+
+const append = (formData: FormData, key: string, value: any) =>
+  formData.append(key, isFile(value) ? platformFile(value) : value);
+//#endregion
+
 export const createFormData = (data: FormDataObject): FormData => {
   const formData = new FormData();
   const arrayData = Object.entries(data);
   if (arrayData.isEmpty) return formData;
 
-  //#region form data helper
-  const isFile = (param: any): param is File =>
-    typeof param === 'object' && FILE_KEYS.every(fileKey => fileKey in param);
-
-  const platformFile = (file: File): File => ({
-    ...file,
-    uri: Platform.select({ android: file.uri, ios: file.uri.replace(FILE_PREFIX, '') }) || '',
-  });
-
-  const append = (key: string, value: any) =>
-    formData.append(key, isFile(value) ? platformFile(value) : value);
-  //#endregion
-
   for (const [key, value] of arrayData) {
     if (Array.isArray(value)) {
       const formDataKey = key.endsWith('[]') ? key : `${key}[]`;
-      value.forEach(val => append(formDataKey, val));
+      value.forEach(val => append(formData, formDataKey, val));
     } else {
-      append(key, value);
+      append(formData, key, value);
     }
   }
 

@@ -1,4 +1,4 @@
-import RootNavigator from '@navigation';
+import RootNavigator from '@navigators';
 import AppProvider from '@providers';
 
 const App = () => (

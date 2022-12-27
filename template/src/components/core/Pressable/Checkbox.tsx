@@ -16,32 +16,27 @@ interface CheckboxProps<T = any> extends Omit<CheckboxItem<T>, 'value'>, Omit<Vi
   containerStyle?: StyleProp<ViewStyle>;
 }
 
-const _Checkbox = ({
-  label,
-  isActive,
-  onPress,
-  disabled,
-  containerStyle,
-  ...props
-}: CheckboxProps) => {
-  const behaviorStyle = disabled ? 'Disabled' : 'Enabled';
-  const stateStyle = isActive ? 'Active' : 'Inactive';
-  const styles = useStyle(createStyles);
+const _Checkbox = compareMemo<CheckboxProps>(
+  ({ label, isActive, onPress, disabled, containerStyle, ...props }) => {
+    const behaviorStyle = disabled ? 'Disabled' : 'Enabled';
+    const stateStyle = isActive ? 'Active' : 'Inactive';
+    const styles = useStyle(createStyles);
 
-  return (
-    <Row {...props} style={[styles.container, containerStyle]}>
-      <PressArea
-        hitSlop={8}
-        style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
-        {...{ disabled, onPress }}
-      >
-        <Icon source={icons.checkbox.tick} size={20} style={styles.tick(isActive)} />
-      </PressArea>
-      <Spacer w={6} />
-      <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
-    </Row>
-  );
-};
+    return (
+      <Row {...props} style={[styles.container, containerStyle]}>
+        <PressArea
+          hitSlop={8}
+          style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
+          {...{ disabled, onPress }}
+        >
+          <Icon source={icons.checkbox.tick} size={20} style={styles.tick(isActive)} />
+        </PressArea>
+        <Spacer w={6} />
+        <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
+      </Row>
+    );
+  },
+);
 
 const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
@@ -79,8 +74,6 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     },
   });
 
-const Checkbox = compareMemo<CheckboxProps>(_Checkbox) as <T = any>(
-  props: CheckboxProps<T>,
-) => JSX.Element;
+const Checkbox = _Checkbox as <T = any>(props: CheckboxProps<T>) => JSX.Element;
 
 export default Checkbox;

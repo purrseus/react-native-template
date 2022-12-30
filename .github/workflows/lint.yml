@@ -1,4 +1,4 @@
-name: lint
+name: Lint
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
-      - name: Setup Node
+      - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: 16.x

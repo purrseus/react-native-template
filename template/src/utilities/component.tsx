@@ -5,7 +5,6 @@ import {
   createRef,
   forwardRef,
   ForwardRefExoticComponent,
-  ForwardRefRenderFunction,
   memo,
   PropsWithoutRef,
   RefAttributes,
@@ -30,7 +29,7 @@ export const compareMemo = <T, P = undefined>(
 ) => memo(Component, isEqual);
 
 export const createField = <R, P extends CommonFieldProps>(
-  Component: ForwardRefRenderFunction<R, P>,
+  Component: ReturnType<typeof forwardRef<R, P>>,
   isTextInput: boolean = false,
 ) =>
   memo(
@@ -42,14 +41,16 @@ export const createField = <R, P extends CommonFieldProps>(
         formState: { errors },
       } = useController({ name: props.name, control });
 
-      const fieldProps = useMemo<CommonFieldProps<typeof props.value>>(
-        () => ({
-          [isTextInput ? 'onChangeText' : 'onChange']: onChange,
-          errorText: (errors[props.name] as any)?.message,
-          value,
-          name: props.name,
-        }),
-        [onChange, value, props.name, errors[props.name]],
+      const fieldProps = useMemo(
+        () =>
+          ({
+            ...props,
+            [isTextInput ? 'onChangeText' : 'onChange']: onChange,
+            errorText: (errors[props.name] as any)?.message,
+            value,
+            name: props.name,
+          } as PropsWithoutRef<P>),
+        [onChange, value, props, errors[props.name]],
       );
 
       const refCallback = useCallback<RefCallback<R>>(
@@ -62,7 +63,7 @@ export const createField = <R, P extends CommonFieldProps>(
         [controllerRef, ref],
       );
 
-      return Component({ ...props, ...fieldProps }, refCallback);
+      return <Component {...fieldProps} ref={refCallback} />;
     }),
     isEqual,
   );

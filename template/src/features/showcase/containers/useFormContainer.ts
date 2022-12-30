@@ -1,7 +1,6 @@
 import { CheckboxItem } from '@core/interfaces';
 import { ValidationObject } from '@core/types';
 import { useAppForm } from '@hooks';
-import { logger } from '@utilities';
 import { useMemo } from 'react';
 import { array, string } from 'yup';
 

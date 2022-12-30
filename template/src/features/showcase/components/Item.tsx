@@ -2,7 +2,7 @@ import { Image, Row, Spacer, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { createShadow, referenceTypeFormatter } from '@utilities';
+import { createShadow } from '@utilities';
 import { View } from 'react-native';
 import { Data } from '../containers/useListContainer';
 

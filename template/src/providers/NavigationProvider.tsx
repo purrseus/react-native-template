@@ -1,4 +1,4 @@
-import { navigationRef } from '@navigation';
+import { navigationRef } from '@navigators';
 import { useFlipper } from '@react-navigation/devtools';
 import { NavigationContainer } from '@react-navigation/native';
 import { PropsWithChildren } from 'react';

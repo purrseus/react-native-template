@@ -4,7 +4,7 @@ import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
-import { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
+import { forwardRef, RefAttributes, useMemo } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import List, { ListProps } from './List';
@@ -17,59 +17,54 @@ interface InfiniteListProps<T = any>
   ListFetchingComponent?: ListProps<T>['ListEmptyComponent'];
 }
 
-const _InfiniteList = (
-  {
-    requestCallback,
-    config,
-    ListFetchingComponent,
-    ListEmptyComponent,
-    ...props
-  }: InfiniteListProps,
-  ref: ForwardedRef<FlatList>,
-) => {
-  const styles = useStyle(createStyles);
+const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
+  forwardRef(
+    ({ requestCallback, config, ListFetchingComponent, ListEmptyComponent, ...props }, ref) => {
+      const styles = useStyle(createStyles);
 
-  const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
-    requestCallback,
-    config,
-  );
+      const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
+        requestCallback,
+        config,
+      );
 
-  const shouldShowFooter = canLoadMore && !listProps.refreshing && !fetching;
-  const contentContainerStyle = fetching ? globalStyles.flexFill : props.contentContainerStyle;
+      const shouldShowFooter = canLoadMore && !listProps.refreshing && !fetching;
+      const contentContainerStyle = fetching ? globalStyles.flexFill : props.contentContainerStyle;
 
-  const FetchingComponent = useMemo(
-    () =>
-      ListFetchingComponent || (
-        <View style={globalStyles.flexFillCenter}>
-          <ActivityIndicator size="large" />
-        </View>
-      ),
-    [ListFetchingComponent],
-  );
+      const FetchingComponent = useMemo(
+        () =>
+          ListFetchingComponent || (
+            <View style={globalStyles.flexFillCenter}>
+              <ActivityIndicator size="large" />
+            </View>
+          ),
+        [ListFetchingComponent],
+      );
 
-  const ListFooterComponent = useMemo(
-    () => (
-      <View style={styles.footer}>
-        <ActivityIndicator />
-      </View>
-    ),
-    [styles.footer],
-  );
+      const ListFooterComponent = useMemo(
+        () => (
+          <View style={styles.footer}>
+            <ActivityIndicator />
+          </View>
+        ),
+        [styles.footer],
+      );
 
-  const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
+      const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
 
-  return (
-    <List
-      {...props}
-      {...listProps}
-      ref={ref}
-      contentContainerStyle={contentContainerStyle}
-      onEndReached={handleOnEndReached}
-      ListEmptyComponent={fetching ? FetchingComponent : ListEmptyComponent}
-      {...(shouldShowFooter && { ListFooterComponent })}
-    />
-  );
-};
+      return (
+        <List
+          {...props}
+          {...listProps}
+          ref={ref}
+          contentContainerStyle={contentContainerStyle}
+          onEndReached={handleOnEndReached}
+          ListEmptyComponent={fetching ? FetchingComponent : ListEmptyComponent}
+          {...(shouldShowFooter && { ListFooterComponent })}
+        />
+      );
+    },
+  ),
+);
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({
@@ -78,9 +73,7 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-const InfiniteList = compareMemo<FlatList, InfiniteListProps>(forwardRef(_InfiniteList)) as <
-  T = any,
->(
+const InfiniteList = _InfiniteList as <T = any>(
   props: InfiniteListProps<T> & RefAttributes<FlatList<T>>,
 ) => JSX.Element;
 

@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, createShadow, isAndroid as isAndroidOS } from '@utilities';
+import { compareMemo, createShadow } from '@utilities';
 import { ReactNode, useLayoutEffect } from 'react';
 import {
   ActivityIndicatorProps,
@@ -50,7 +50,6 @@ const Switch = compareMemo<SwitchProps>(
     ...props
   }) => {
     const styles = useStyle(createStyles);
-    const isAndroid = isAndroidOS();
     const [trackActiveColor, trackInactiveColor] = styles.trackColor as (string | number)[];
     const [thumbActiveColor, thumbInactiveColor] = styles.thumbColor as (string | number)[];
     const statusAnimated = useSharedValue(+isEnabled);
@@ -76,7 +75,7 @@ const Switch = compareMemo<SwitchProps>(
       const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
-        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid ? scale : 1 }],
+        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid() ? scale : 1 }],
         backgroundColor: backgroundColor as ColorValue,
       };
     }, [disabled, isEnabled]);

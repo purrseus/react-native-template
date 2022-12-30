@@ -16,9 +16,9 @@ import {
   TextsScreen,
 } from '@features/showcase/screens';
 import { useAppSelector, useStyle } from '@hooks';
-import { stackScreenOptions } from '@navigation/options';
-import createStyles from '@navigation/styles';
-import BottomTabBar from '@navigation/tabs/BottomTabBar';
+import { stackScreenOptions } from '@navigators/options';
+import createStyles from '@navigators/styles';
+import BottomTabBar from '@navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();

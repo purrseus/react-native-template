@@ -1,4 +1,3 @@
-import { isAndroid, isIos } from '@utilities';
 import { useCallback, useEffect, useState } from 'react';
 import { Keyboard, KeyboardEventListener, KeyboardEventName } from 'react-native';
 

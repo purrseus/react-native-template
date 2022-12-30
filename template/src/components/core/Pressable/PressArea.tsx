@@ -1,5 +1,5 @@
 import { useThrottle } from '@hooks';
-import { compareMemo, duration } from '@utilities';
+import { compareMemo } from '@utilities';
 import { forwardRef, useCallback } from 'react';
 import {
   Pressable,

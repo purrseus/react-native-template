@@ -53,7 +53,7 @@ interface CommonImageProps<C extends boolean>
 
 export type ImageProps<C extends boolean = false> = CommonImageProps<C> & MixinImageProps<C>;
 
-const _Image = ({ style, cached, onLoad, ...props }: ImageProps) => {
+const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => {
   const styles = useStyle(createStyles);
   const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
   const imageStyle = styles[!!size.width && !!size.height ? 'image' : 'progressImage'];
@@ -82,7 +82,7 @@ const _Image = ({ style, cached, onLoad, ...props }: ImageProps) => {
       style={[imageStyle, style as StyleProp<ImageStyle>]}
     />
   );
-};
+});
 
 const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
@@ -94,8 +94,6 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-const Image = compareMemo<ImageProps>(_Image) as <T extends boolean = false>(
-  props: ImageProps<T>,
-) => JSX.Element;
+const Image = _Image as <T extends boolean = false>(props: ImageProps<T>) => JSX.Element;
 
 export default Image;

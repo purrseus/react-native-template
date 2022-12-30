@@ -1,5 +1,5 @@
 import { Slice } from '@reduxjs/toolkit';
-import { storage } from '@store/integration';
+import { storage } from '@store/integrations';
 import Config from 'react-native-config';
 import { PersistConfig, persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';

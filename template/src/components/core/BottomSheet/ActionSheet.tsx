@@ -1,7 +1,7 @@
 /* eslint-disable react-native/split-platform-components */
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
-import { alphaHexColor, compareMemo, duration, isIos, wait } from '@utilities';
+import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import {
   ActionSheetIOS,
@@ -29,6 +29,7 @@ const DEFAULT_MARGIN = 8;
 
 const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
+    const isIOS = isIos();
     const colors = useColor();
     const styles = useStyle(createStyles);
     const { theme } = useAppSelector(state => state.common);
@@ -43,7 +44,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
     const onShow = useThrottle(
       () => {
-        if (isIos()) {
+        if (isIOS) {
           ActionSheetIOS.showActionSheetWithOptions(
             {
               ...props,
@@ -69,7 +70,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         /**
          * @see Modal onBackdropPress below
          */
-        if (!isIos() && typeof buttonIndex === 'number') {
+        if (!isIOS && typeof buttonIndex === 'number') {
           setIsVisible(false);
           await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
           onSelect(buttonIndex);
@@ -156,7 +157,8 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
       [handleSelectOption, options, props.destructiveButtonIndex, props.options, styles, tintColor],
     );
 
-    if (isIos()) return null;
+    if (isIOS) return null;
+
     return (
       <Modal
         type="bottomSheet"

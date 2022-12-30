@@ -33,7 +33,7 @@ root
 │   ├── core
 │   │   ├── constants
 │   │   ├── data
-│   │   ├── declare
+│   │   ├── declarations
 │   │   ├── enums
 │   │   ├── interfaces
 │   │   └── types
@@ -42,7 +42,7 @@ root
 │   ├── i18n
 │   │   └── locales
 │   ├── layouts
-│   ├── navigation
+│   ├── navigators
 │   │   ├── stacks
 │   │   └── tabs
 │   ├── providers

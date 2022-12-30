@@ -1,7 +1,6 @@
 import { Alert } from '@components/core';
 import { DateTimePickerMethods, ImagePickerMethods } from '@core/interfaces';
 import { PickedImageType } from '@core/types';
-import { referenceTypeFormatter } from '@utilities';
 import { useEffect, useRef, useState } from 'react';
 
 const usePickerContainer = () => {

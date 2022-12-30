@@ -1,19 +1,10 @@
 # :seedling: React Native Template
 
-<p>
-  <a href="#seedling-react-native-template">
-    <img alt="Build" src="https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml/badge.svg">
-  </a>
-  <a href="https://www.npmjs.com/package/@purrseus/react-native-template">
-    <img alt="npm" src="https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm">
-  </a>
-  <a href="https://github.com/thiendo261/react-native-template#readme">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/thiendo261/react-native-template.svg">
-  </a>
-</p>
+[![Current lint status.][lint-badge]][lint]
+[![Current publish package status.][publish-badge]][publish]
+[![Current npm package version.][npm-badge]][npm]
+[![Documentation][documentation-badge]][documentation]
+[![License][license-badge]][license]
 
 > Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app.
 
@@ -117,8 +108,19 @@ See [Available Scripts](./docs/scripts.md).
 
 This project is [MIT](./LICENSE) licensed.
 
-## :sparkles: Donate
+<!-- badge -->
 
-<a href="https://www.buymeacoffee.com/thiendo261" target="_blank">
-  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
-</a>
+[lint]: https://github.com/thiendo261/react-native-template/actions/workflows/lint.yml
+[lint-badge]: https://github.com/thiendo261/react-native-template/actions/workflows/lint.yml/badge.svg
+
+[publish]: https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml
+[publish-badge]: https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml/badge.svg
+
+[npm]: https://www.npmjs.com/package/@purrseus/react-native-template
+[npm-badge]: https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm
+
+[documentation]: https://github.com/thiendo261/react-native-template#readme
+[documentation-badge]: https://img.shields.io/badge/documentation-yes-brightgreen.svg
+
+[license]: https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE
+[license-badge]: https://img.shields.io/github/license/thiendo261/react-native-template.svg

@@ -3,8 +3,11 @@
 [![Current lint status.][lint-badge]][lint]
 [![Current publish package status.][publish-badge]][publish]
 [![Current npm package version.][npm-badge]][npm]
+[![Current version of React Native.][react-native-version-badge]][react-native-version]
+[![Current version of Typescript.][typescript-version-badge]][typescript-version]
 [![Documentation][documentation-badge]][documentation]
 [![License][license-badge]][license]
+[![Buy me a coffee][buymeacoffee-badge]][buymeacoffee]
 
 > Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app.
 
@@ -119,8 +122,17 @@ This project is [MIT](./LICENSE) licensed.
 [npm]: https://www.npmjs.com/package/@purrseus/react-native-template
 [npm-badge]: https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm
 
+[react-native-version]: https://github.com/thiendo261/react-native-template/blob/main/template/package.json
+[react-native-version-badge]: https://img.shields.io/github/package-json/dependency-version/thiendo261/react-native-template/react-native?filename=template%2Fpackage.json&logo=react
+
+[typescript-version]: https://github.com/thiendo261/react-native-template/blob/main/template/package.json
+[typescript-version-badge]: https://img.shields.io/github/package-json/dependency-version/thiendo261/react-native-template/dev/typescript?filename=template%2Fpackage.json&logo=typescript
+
 [documentation]: https://github.com/thiendo261/react-native-template#readme
 [documentation-badge]: https://img.shields.io/badge/documentation-yes-brightgreen.svg
 
 [license]: https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE
 [license-badge]: https://img.shields.io/github/license/thiendo261/react-native-template.svg
+
+[buymeacoffee]: https://www.buymeacoffee.com/thiendo261
+[buymeacoffee-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-thiendo261-orange?logo=buymeacoffee

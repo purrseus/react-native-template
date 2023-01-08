@@ -116,7 +116,17 @@ declare global {
     /**
      * Return a string without spaces.
      */
-    removeWhiteSpaces(): this;
+    removeWhiteSpaces(): string;
+
+    /**
+     * Return a capitalized string.
+     */
+    capitalize(): string;
+
+    /**
+     * Return a uncapitalized string.
+     */
+    uncapitalize(): string;
   }
 }
 

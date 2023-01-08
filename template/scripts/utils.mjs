@@ -52,7 +52,7 @@ export const createQuestions = async questions => {
   return answers;
 };
 
-export const uncapitalized = text =>
+export const uncapitalize = text =>
   typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
 
 export const getArguments = () => process.argv.slice(2);

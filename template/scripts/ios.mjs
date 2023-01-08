@@ -5,7 +5,7 @@ import {
   execScriptSync,
   getArguments,
   platformBuildTypes,
-  uncapitalized,
+  uncapitalize,
 } from './utils.mjs';
 
 (async () => {
@@ -28,6 +28,6 @@ import {
   if (platformBuildTypes.ios.includes(buildType)) {
     openXCode();
   } else {
-    execScriptSync(commands.runIos(uncapitalized(env), buildType, envShorts[env]));
+    execScriptSync(commands.runIos(uncapitalize(env), buildType, envShorts[env]));
   }
 })();

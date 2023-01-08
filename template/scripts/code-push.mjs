@@ -4,7 +4,7 @@ import {
   envs,
   execScriptSync,
   loadEnvFile,
-  uncapitalized,
+  uncapitalize,
 } from './utils.mjs';
 
 (async () => {
@@ -23,7 +23,7 @@ import {
     },
   ]);
 
-  const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalized(env));
+  const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalize(env));
 
   const androidCommand = commands.codePush('🤖 Android', env, ANDROID_VERSION_NAME);
   const iosCommand = commands.codePush('🍎 iOS', env, IOS_VERSION);

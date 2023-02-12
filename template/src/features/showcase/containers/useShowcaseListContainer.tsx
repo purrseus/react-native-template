@@ -9,7 +9,7 @@ const useShowcaseListContainer = ({
 }: ProtectedScreenProps<ProtectedScreenName.ShowcaseList>) => {
   const data = [
     ProtectedScreenName.BottomSheets,
-    ProtectedScreenName.Pressable,
+    ProtectedScreenName.Touchable,
     ProtectedScreenName.Form,
     ProtectedScreenName.Images,
     ProtectedScreenName.Layouts,

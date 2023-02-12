@@ -1,21 +1,21 @@
 import { icons } from '@assets';
 import { Button, Row, Spacer, Switch } from '@components/core';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
 import { withHook } from '@utilities';
 import { Separator } from '../components';
-import { usePressableContainer } from '../containers';
+import { useTouchableContainer } from '../containers';
 
-const PressableScreen = withHook(usePressableContainer, ({ isEnabled, onPress, isLoading }) => {
+const TouchableScreen = withHook(useTouchableContainer, ({ isEnabled, onPress, isLoading }) => {
   const styles = useStyle(createStyles);
 
   return (
     <StackContainer
       wrapperType="scrollView"
-      title={ProtectedScreenName.Pressable}
+      title={ProtectedScreenName.Touchable}
       wrapperStyle={styles.scrollView}
     >
       <Switch isEnabled={isEnabled} loading={isLoading} onPress={onPress} />
@@ -91,4 +91,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default PressableScreen;
+export default TouchableScreen;

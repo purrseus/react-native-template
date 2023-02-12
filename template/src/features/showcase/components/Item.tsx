@@ -1,24 +1,25 @@
-import { Image, Row, Spacer, Text } from '@components/core';
+import { Image, Touchable, Spacer, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { createShadow } from '@utilities';
 import { View } from 'react-native';
-import { Data } from '../containers/useListContainer';
+import { Photos } from '../services/adapters';
 
-const Item = ({ thumbnailUrl, ...props }: Data) => {
+const Item = (props: Photos[number]) => {
   const styles = useStyle(createStyles);
+  const handleOnPress = () => print(props);
 
   return (
-    <Row style={styles.container}>
-      <Image source={{ uri: thumbnailUrl }} style={styles.image} />
+    <Touchable style={styles.container} onPress={handleOnPress}>
+      {!!props.thumbnailUrl && <Image source={{ uri: props.thumbnailUrl }} style={styles.image} />}
 
       <Spacer w={16} />
 
       <View style={globalStyles.flexFill}>
         <Text style={styles.text}>{referenceTypeFormatter(props)}</Text>
       </View>
-    </Row>
+    </Touchable>
   );
 };
 
@@ -30,6 +31,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       marginHorizontal: 16,
       borderRadius: 16,
       backgroundColor: colors.white,
+      flexDirection: 'row',
       ...createShadow(colors.shadow, [0, 0], 0.1, 8, 16),
     },
     image: {

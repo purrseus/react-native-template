@@ -11,15 +11,15 @@ const appCenterAppName = {
   '🍎 iOS': '<Your_iOS_app_name>',
 };
 
-const platformName = {
-  android: '🤖 Android',
-  ios: '🍎 iOS',
-};
-
 const gitBranches = {
   Development: 'develop',
   Staging: 'staging',
   Production: 'main',
+};
+
+const platformName = {
+  android: '🤖 Android',
+  ios: '🍎 iOS',
 };
 
 export const platformBuildTypes = {

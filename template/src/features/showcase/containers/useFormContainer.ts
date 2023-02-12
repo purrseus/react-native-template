@@ -36,8 +36,8 @@ const useFormContainer = () => {
   ) as Record<keyof typeof formNames, string>;
 
   const onSubmit = form.handleSubmit(
-    values => logger(values),
-    errors => logger(errors),
+    values => print(values),
+    errors => print(errors),
   );
 
   return { checkboxData, form, onSubmit, formNames, formLabels };

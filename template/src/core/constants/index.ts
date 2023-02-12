@@ -1,15 +1,10 @@
 import { LanguageMap, Locale } from '@core/types';
-import { ThrottleSettings } from 'lodash';
 import { Insets } from 'react-native';
 import { LinearGradientProps } from 'react-native-linear-gradient';
 import { Edge } from 'react-native-safe-area-context';
 
 export const ONE_SECOND = 1000;
 export const HORIZONTAL_SAFETY_EDGES: ReadonlyArray<Edge> = ['left', 'right'];
-export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
-  leading: true,
-  trailing: false,
-};
 
 //#region sizes
 export const TAB_BAR_HEIGHT = 70;

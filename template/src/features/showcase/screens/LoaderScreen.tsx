@@ -1,4 +1,4 @@
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { globalStyles } from '@themes';
 import { withHook } from '@utilities';

@@ -1,12 +1,11 @@
 Object.trimValues = function (object) {
-  type ObjType = typeof object;
-  return Object.keys(object).reduce(
-    (obj: ObjType, key) => ({
-      ...obj,
-      [key]: typeof object[key] === 'string' ? object[key].trim() : object[key],
-    }),
-    {} as ObjType,
-  ) as unknown as ObjType;
+  const trimmedObject = {} as typeof object;
+
+  for (const key in object) {
+    trimmedObject[key] = typeof object[key] === 'string' ? object[key].trim() : object[key];
+  }
+
+  return trimmedObject;
 };
 
 export {};

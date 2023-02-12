@@ -15,14 +15,14 @@ import Icon, { IconProps } from '../Image/Icon';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
-import PressArea, { PressAreaProps } from './PressArea';
+import Touchable, { TouchableProps } from './Touchable';
 
 type SizeName = 'small' | 'medium' | 'large';
 type ButtonType = 'filled' | 'outlined' | 'tonal';
 type ButtonSize = number;
 type TitleSize = number;
 
-interface ButtonProps extends PressAreaProps {
+interface ButtonProps extends TouchableProps {
   title: string;
   size?: SizeName;
   type?: ButtonType;
@@ -105,7 +105,7 @@ const Button = compareMemo<ButtonProps>(
     );
 
     return (
-      <PressArea
+      <Touchable
         {...props}
         disabled={loading || disabled}
         style={[styles.container(buttonSize), styles[type], !!disabled && styles.disabled, style]}
@@ -119,7 +119,7 @@ const Button = compareMemo<ButtonProps>(
         )}
 
         {loading ? <ActivityIndicator color={colorStyle.color} /> : ButtonContent}
-      </PressArea>
+      </Touchable>
     );
   },
 );

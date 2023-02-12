@@ -28,6 +28,6 @@ const setupCodePush = () => {
     return;
   }
   execScriptSync(
-    'yarn && git init && git branch -m main && git add . && git commit -m "Initial commit" -n',
+    'yarn && git init && git branch -m main && git add . && git commit -m "chore: initial commit 🚀"',
   );
 })();

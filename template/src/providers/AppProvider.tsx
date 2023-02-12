@@ -1,10 +1,10 @@
-import { MMKVStorage } from '@store/integrations';
+import { MMKVStorage } from '@utilities/store';
 import { PropsWithChildren } from 'react';
 import { DevSettings, UIManager } from 'react-native';
 import CodePush from 'react-native-code-push';
 import LayoutProvider from './LayoutProvider';
 import NavigationProvider from './NavigationProvider';
-import StoreProvider from './StoreProvider';
+import QueryProvider from './QueryProvider';
 
 //#region bootstrap
 if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental)
@@ -26,11 +26,11 @@ if (__DEV__) {
 //#endregion
 
 const AppProvider = ({ children }: PropsWithChildren) => (
-  <StoreProvider>
+  <QueryProvider>
     <NavigationProvider>
       <LayoutProvider>{children}</LayoutProvider>
     </NavigationProvider>
-  </StoreProvider>
+  </QueryProvider>
 );
 
 export default __DEV__ ? AppProvider : CodePush(AppProvider);

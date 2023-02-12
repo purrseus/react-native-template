@@ -30,8 +30,9 @@ Object.defineProperties(Array.prototype, {
 
 Array.prototype.swap = function (indexA, indexB) {
   const array = [...this];
-  const [aElement] = array.splice(indexA, 1, array[indexB]);
-  array.splice(indexB, 1, aElement);
+  const temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
   return array;
 };
 

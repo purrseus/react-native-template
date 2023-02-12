@@ -1,4 +1,4 @@
-export enum UnprotectedScreenName {
+export enum PublicScreenName {
   Login = 'Login',
   Register = 'Register',
 }
@@ -8,7 +8,7 @@ export enum ProtectedScreenName {
   // Showcase
   ShowcaseList = 'ShowcaseList',
   BottomSheets = 'BottomSheets',
-  Pressable = 'Pressable',
+  Touchable = 'Touchable',
   Form = 'Form',
   Images = 'Images',
   Layouts = 'Layouts',

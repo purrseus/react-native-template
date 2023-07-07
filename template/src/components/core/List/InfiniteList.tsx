@@ -1,34 +1,54 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { InfiniteScrollConfig, StyleCallbackParams } from '@core/interfaces';
-import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
+import { StyleCallbackParams } from '@core/interfaces';
+import { useStyle, useThrottle } from '@hooks';
+import { FlashList } from '@shopify/flash-list';
+import {
+  GetNextPageParamFunction,
+  QueryFunction,
+  QueryKey,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
-import { AxiosRequestConfig } from 'axios';
-import { forwardRef, RefAttributes, useMemo } from 'react';
-import { FlatList, RefreshControlProps, View } from 'react-native';
+import { forwardRef, RefAttributes, useMemo, useState } from 'react';
+import { RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import List, { ListProps } from './List';
 
 interface InfiniteListProps<T = any>
-  extends Omit<ListProps<T>, keyof RefreshControlProps | 'data'>,
+  extends Omit<ListProps<T, true>, keyof RefreshControlProps | 'data' | 'isFlashList'>,
     Partial<RefreshControlProps> {
-  requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
-  config?: InfiniteScrollConfig;
-  ListFetchingComponent?: ListProps<T>['ListEmptyComponent'];
+  queryKey: QueryKey;
+  queryFn: QueryFunction<T[]>;
+  getNextPageParam?: GetNextPageParamFunction<T[]>;
+  ListFetchingComponent?: ListProps<T, true>['ListEmptyComponent'];
+  ListErrorComponent?: ListProps<T, true>['ListEmptyComponent'];
 }
 
-const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
+const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
   forwardRef(
-    ({ requestCallback, config, ListFetchingComponent, ListEmptyComponent, ...props }, ref) => {
+    (
+      {
+        queryKey,
+        queryFn,
+        getNextPageParam,
+        ListFetchingComponent,
+        ListErrorComponent,
+        ListEmptyComponent,
+        ...props
+      },
+      ref,
+    ) => {
       const styles = useStyle(createStyles);
+      const [refreshing, setRefreshing] = useState(false);
 
-      const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
-        requestCallback,
-        config,
-      );
+      const { fetchNextPage, data, isError, hasNextPage, refetch, isLoading } = useInfiniteQuery({
+        queryKey,
+        queryFn,
+        getNextPageParam: getNextPageParam || ((_, allPages) => allPages.length + 1),
+      });
 
-      const shouldShowFooter = canLoadMore && !listProps.refreshing && !fetching;
-      const contentContainerStyle = fetching ? globalStyles.flexFill : props.contentContainerStyle;
+      const isFetching = isLoading && !refreshing;
 
       const FetchingComponent = useMemo(
         () =>
@@ -49,17 +69,28 @@ const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
         [styles.footer],
       );
 
-      const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
+      const handleOnRefresh = useThrottle(() => {
+        setRefreshing(true);
+        refetch().finally(() => setRefreshing(false));
+      }, [setRefreshing, refetch]);
+
+      const handleOnEndReached = useThrottle(() => {
+        fetchNextPage();
+      }, [fetchNextPage]);
 
       return (
-        <List
+        <List<Awaited<ReturnType<typeof queryFn>>[number], true>
           {...props}
-          {...listProps}
+          isFlashList
+          data={data?.pages.flat()}
+          refreshing={refreshing}
+          onRefresh={handleOnRefresh}
           ref={ref}
-          contentContainerStyle={contentContainerStyle}
           onEndReached={handleOnEndReached}
-          ListEmptyComponent={fetching ? FetchingComponent : ListEmptyComponent}
-          {...(shouldShowFooter && { ListFooterComponent })}
+          ListEmptyComponent={
+            isError ? ListErrorComponent : isFetching ? FetchingComponent : ListEmptyComponent
+          }
+          {...(hasNextPage && { ListFooterComponent })}
         />
       );
     },
@@ -74,7 +105,7 @@ const createStyles = ({ create }: StyleCallbackParams) =>
   });
 
 const InfiniteList = _InfiniteList as <T = any>(
-  props: InfiniteListProps<T> & RefAttributes<FlatList<T>>,
+  props: InfiniteListProps<T> & RefAttributes<FlashList<T>>,
 ) => JSX.Element;
 
 export default InfiniteList;

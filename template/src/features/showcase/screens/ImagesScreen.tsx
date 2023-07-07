@@ -1,5 +1,5 @@
 import { Icon, Image, Spacer, Text } from '@components/core';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';

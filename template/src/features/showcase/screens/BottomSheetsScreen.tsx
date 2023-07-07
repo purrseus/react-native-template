@@ -1,6 +1,6 @@
 import { BottomSheet, Text } from '@components/core';
 import ActionSheet from '@components/core/BottomSheet/ActionSheet';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -35,7 +35,7 @@ const BottomSheetsScreen = withHook(
         <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={bottomSheetSnapPoints}>
           <Text>This is a BottomSheet</Text>
         </BottomSheet>
-        <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger} />
+        <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={print} />
       </>
     );
   },

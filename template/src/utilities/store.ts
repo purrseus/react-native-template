@@ -1,23 +1,32 @@
-import { Slice } from '@reduxjs/toolkit';
-import { storage } from '@store/integrations';
 import Config from 'react-native-config';
-import { PersistConfig, persistReducer } from 'redux-persist';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { MMKV } from 'react-native-mmkv';
+import { initializeMMKVFlipper } from 'react-native-mmkv-flipper-plugin';
+import { create, StateCreator } from 'zustand';
+import { StateStorage, PersistOptions, createJSONStorage, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
-export const createPersistReducer = <
-  S extends Slice,
-  State extends ReturnType<S['getInitialState']>,
->(
-  slice: S,
-  config?: Partial<PersistConfig<State>>,
-) => {
-  const persistConfig: PersistConfig<State> = {
-    storage,
-    version: 1,
-    key: `${Config.APP_NAME!.removeWhiteSpaces()}/${slice.name}`,
-    stateReconciler: autoMergeLevel2,
-    ...config,
-  };
+export const MMKVStorage = new MMKV();
 
-  return persistReducer<State>(persistConfig, slice.reducer);
+if (__DEV__) initializeMMKVFlipper({ default: MMKVStorage });
+
+const persistStorage: StateStorage = {
+  setItem: (name, value) => MMKVStorage.set(name, value),
+  getItem: name => MMKVStorage.getString(name) ?? null,
+  removeItem: name => MMKVStorage.delete(name),
 };
+
+export const createPersistOptions = <T>(
+  name: string,
+  additionalOptions?: Partial<PersistOptions<T, T>>,
+): PersistOptions<T, T> => ({
+  version: 1,
+  name: `${Config.APP_NAME}/${name}-storage`,
+  storage: createJSONStorage(() => persistStorage),
+  ...additionalOptions,
+});
+
+export const createPersistenceStore = <T>(
+  name: string,
+  initializer: StateCreator<T, [['zustand/persist', unknown], ['zustand/immer', never]], [], T>,
+  persistOptions?: Parameters<typeof createPersistOptions<T>>[1],
+) => create<T>()(persist(immer(initializer), createPersistOptions<T>(name, persistOptions)));

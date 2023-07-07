@@ -6,7 +6,7 @@ export { default as ListScreen } from './ListScreen';
 export { default as LoaderScreen } from './LoaderScreen';
 export { default as ModalsScreen } from './ModalsScreen';
 export { default as PickersScreen } from './PickersScreen';
-export { default as PressableScreen } from './PressableScreen';
+export { default as TouchableScreen } from './TouchableScreen';
 export { default as ShowcaseListScreen } from './ShowcaseListScreen';
 export { default as SpacersScreen } from './SpacersScreen';
 export { default as TextsScreen } from './TextsScreen';

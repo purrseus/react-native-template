@@ -3,9 +3,9 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
-import PressArea, { PressAreaProps } from '../Pressable/PressArea';
+import Touchable, { TouchableProps } from '../Touchable/Touchable';
 
-export interface TextProps extends RNTextProps, Pick<PressAreaProps, 'hitSlop' | 'throttle'> {}
+export interface TextProps extends RNTextProps, Pick<TouchableProps, 'hitSlop' | 'throttle'> {}
 
 const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, throttle, ...props }) => {
   const styles = useStyle(createStyles);
@@ -15,9 +15,9 @@ const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, throttle, ..
   );
 
   return onPress ? (
-    <PressArea {...{ onPress, hitSlop, throttle }} style={styles.pressArea}>
+    <Touchable {...{ onPress, hitSlop, throttle }} style={styles.touchable}>
       <TextComponent />
-    </PressArea>
+    </Touchable>
   ) : (
     <TextComponent />
   );
@@ -29,7 +29,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       fontSize: DEFAULT_FONT_SIZE,
       color: colors.primaryText,
     },
-    pressArea: {
+    touchable: {
       flexWrap: 'wrap',
     },
   });

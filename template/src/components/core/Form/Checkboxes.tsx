@@ -4,14 +4,12 @@ import { useStyle } from '@hooks';
 import { createField } from '@utilities';
 import { forwardRef, useCallback } from 'react';
 import { StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
-import Checkbox from '../Pressable/Checkbox';
+import Checkbox from '../Touchable/Checkbox';
 
-export interface CheckboxesProps<T = any>
-  extends Omit<ViewProps, 'style'>,
-    Omit<CommonFieldProps<T[]>, 'onChangeText'> {
+export interface CheckboxesProps<T = any> extends Omit<ViewProps, 'style'>, CommonFieldProps<T[]> {
   data: CheckboxItem<T>[];
   containerStyle?: StyleProp<ViewStyle>;
-  checkboxesStyle?: StyleProp<ViewStyle>;
+  checkboxStyle?: StyleProp<ViewStyle>;
   itemStyle?: StyleProp<ViewStyle>;
 }
 
@@ -24,7 +22,7 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
         value = [],
         onChange,
         containerStyle,
-        checkboxesStyle,
+        checkboxStyle,
         itemStyle,
         errorText,
         ...props
@@ -48,7 +46,7 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
         <View {...(props as ViewProps)} style={containerStyle}>
           {!!label && <Text style={styles.label}>{label}</Text>}
 
-          <View style={[styles.checkboxes, checkboxesStyle]}>
+          <View style={[styles.checkboxes, checkboxStyle]}>
             {data.map(item => (
               <Checkbox
                 key={item.label}

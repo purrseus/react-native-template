@@ -17,7 +17,7 @@ module.exports = {
           '@navigators': './src/navigators',
           '@providers': './src/providers',
           '@services': './src/services',
-          '@store': './src/store',
+          '@stores': './src/stores',
           '@themes': './src/themes',
           '@utilities': './src/utilities',
         },

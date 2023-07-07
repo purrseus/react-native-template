@@ -1,21 +1,19 @@
-import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreenProps } from '@core/types';
-import { useAppDispatch } from '@hooks';
-import { authActions } from '@store/slices/auth';
+import { PublicScreenName } from '@core/enums';
+import { PublicScreenProps } from '@core/types';
+import { useAuthStore } from '@stores';
+import isEqual from 'react-fast-compare';
 
-const useLoginContainer = ({ navigation }: UnprotectedScreenProps<UnprotectedScreenName.Login>) => {
-  const dispatch = useAppDispatch();
+const useLoginContainer = ({ navigation }: PublicScreenProps<PublicScreenName.Login>) => {
+  const setTokens = useAuthStore(state => state.setTokens, isEqual);
 
   const handleLogin = () => {
-    dispatch(
-      authActions.setToken({
-        accessToken: 'fakeAccessToken',
-        refreshToken: 'fakeRefreshToken',
-      }),
-    );
+    setTokens({
+      accessToken: 'fakeAccessToken',
+      refreshToken: 'fakeRefreshToken',
+    });
   };
 
-  const navigateToRegister = () => navigation.navigate(UnprotectedScreenName.Register);
+  const navigateToRegister = () => navigation.navigate(PublicScreenName.Register);
 
   return { handleLogin, navigateToRegister };
 };

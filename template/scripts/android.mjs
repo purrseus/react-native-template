@@ -4,7 +4,7 @@ import {
   createQuestions,
   execScriptSync,
   platformBuildTypes,
-  uncapitalized,
+  uncapitalize,
 } from './utils.mjs';
 
 (async () => {
@@ -24,6 +24,6 @@ import {
   if (platformBuildTypes.android.includes(buildType)) {
     execScriptSync(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));
   } else {
-    execScriptSync(commands.runAndroid(uncapitalized(`${env}${buildType}`), suffixAppId[env]));
+    execScriptSync(commands.runAndroid(uncapitalize(`${env}${buildType}`), suffixAppId[env]));
   }
 })();

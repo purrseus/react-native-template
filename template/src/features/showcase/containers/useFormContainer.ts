@@ -1,17 +1,7 @@
 import { CheckboxItem } from '@core/interfaces';
-import { ValidationObject } from '@core/types';
 import { useAppForm } from '@hooks';
 import { useMemo } from 'react';
-import { array, string } from 'yup';
-
-export interface FormObject {
-  firstName: string;
-  lastName: string;
-  age: number;
-  address: string;
-  gender: 'male' | 'female';
-  usingPhone: string[];
-}
+import { z } from 'zod';
 
 enum OS {
   Android,
@@ -24,23 +14,33 @@ const useFormContainer = () => {
     { label: 'iOS', value: OS.Ios },
   ];
 
-  const validateObj = useMemo<ValidationObject<FormObject>>(
-    () => ({
-      firstName: string().required(),
-      lastName: string().required(),
-      age: string().matches(/\d+/).required(),
-      address: string().required(),
-      gender: string().oneOf(['Male', 'Female']).required(),
-      usingPhone: array().of(string()),
-    }),
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        firstName: z.string(),
+        lastName: z.string(),
+        age: z.string().regex(/\d+/),
+        address: z.string(),
+        gender: z.enum(['Male', 'Female']),
+        phones: z.array(z.nativeEnum(OS)),
+      }),
     [],
   );
 
-  const formMethods = useAppForm<FormObject>(validateObj);
+  const form = useAppForm(formSchema);
 
-  const onSubmit = formMethods.handleSubmit(values => logger(values));
+  const formNames = formSchema.keyof().enum;
 
-  return { checkboxData, formMethods, onSubmit };
+  const formLabels = Object.fromEntries(
+    Object.entries(formNames).map(([key, value]) => [key, value.capitalize()]),
+  ) as Record<keyof typeof formNames, string>;
+
+  const onSubmit = form.handleSubmit(
+    values => print(values),
+    errors => print(errors),
+  );
+
+  return { checkboxData, form, onSubmit, formNames, formLabels };
 };
 
 export default useFormContainer;

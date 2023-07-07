@@ -1,22 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { FlashList, FlashListProps as RNFlashListProps } from '@shopify/flash-list';
 import { compareMemo } from '@utilities';
 import { forwardRef, RefAttributes, useCallback, useRef } from 'react';
-import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
+import { FlatList, FlatListProps as RNFlatListProps, RefreshControlProps } from 'react-native';
 import RefreshControl from '../Loader/RefreshControl';
 import BottomSpacer from '../Spacer/BottomSpacer';
 
-export interface ListProps<T = any>
-  extends Omit<FlatListProps<T>, keyof RefreshControlProps>,
+interface FlatListProps<T = any, F = false>
+  extends Omit<RNFlatListProps<T>, keyof RefreshControlProps>,
     Partial<RefreshControlProps> {
   isTabScreen?: boolean;
+  isFlashList?: F;
 }
+
+interface FlashListProps<T = any, F = true>
+  extends Omit<RNFlashListProps<T>, keyof RefreshControlProps>,
+    Partial<RefreshControlProps> {
+  isTabScreen?: boolean;
+  isFlashList: F;
+}
+
+export type ListProps<T = any, F = false> = F extends true
+  ? FlashListProps<T, F>
+  : FlatListProps<T, F>;
 
 const _List = compareMemo<FlatList, ListProps>(
   forwardRef(
     (
-      { refreshing = false, onRefresh, ListFooterComponent, isTabScreen = false, ...props },
+      {
+        isFlashList,
+        refreshing = false,
+        onRefresh,
+        ListFooterComponent,
+        isTabScreen = false,
+        ...props
+      },
       ref,
     ) => {
+      const Component = isFlashList ? FlashList : FlatList;
       const keyRef = useRef<string | null>(null);
 
       const handleKeyExtractor = useCallback((item: Record<string, any>, index: number) => {
@@ -50,20 +71,20 @@ const _List = compareMemo<FlatList, ListProps>(
       }, []);
 
       return (
-        <FlatList
+        <Component
           removeClippedSubviews
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.8}
           scrollEventThrottle={16}
           automaticallyAdjustContentInsets={false}
           automaticallyAdjustsScrollIndicatorInsets={false}
+          keyExtractor={handleKeyExtractor}
           {...props}
           {...(!!onRefresh && {
             refreshControl: <RefreshControl {...{ refreshing, onRefresh }} />,
           })}
           ref={ref}
-          keyExtractor={handleKeyExtractor}
           ListFooterComponent={
             <>
               {ListFooterComponent}
@@ -76,6 +97,8 @@ const _List = compareMemo<FlatList, ListProps>(
   ),
 );
 
-const List = _List as <T = any>(props: ListProps<T> & RefAttributes<FlatList<T>>) => JSX.Element;
+const List = _List as <T = any, F = false>(
+  props: ListProps<T, F> & RefAttributes<F extends true ? FlashList<T> : FlatList<T>>,
+) => JSX.Element;
 
 export default List;

@@ -47,7 +47,7 @@ const showBlockedPermissionAlert = (permissionName: string): false => {
       {
         text: i18n.t('permission.openSettings'),
         onPress: () =>
-          openSettings().catch(() => logger('[permission] Cannot open permission settings!')),
+          openSettings().catch(() => print('[permission] Cannot open permission settings!')),
         style: 'default',
       },
     ],
@@ -87,7 +87,7 @@ const checkMultiplePermissions =
 
       return statuses.every(status => ALLOWED_STATUSES.includes(status));
     } catch (error) {
-      logger(error);
+      print(error);
       return false;
     }
   };
@@ -120,7 +120,7 @@ const checkPermission =
           return false;
       }
     } catch (error) {
-      logger(error);
+      print(error);
       return false;
     }
   };

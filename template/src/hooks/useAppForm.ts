@@ -1,14 +1,13 @@
-import { ValidationObject } from '@core/types';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { FieldValues, useForm, UseFormProps } from 'react-hook-form';
-import { object } from 'yup';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, UseFormProps } from 'react-hook-form';
+import { z, ZodRawShape } from 'zod';
 
-const useAppForm = <T extends FieldValues>(
-  validateObject: ValidationObject<T>,
-  formOptions?: UseFormProps<T>,
+const useAppForm = <Z extends ZodRawShape>(
+  schema: z.ZodObject<Z>,
+  formOptions?: UseFormProps<z.infer<typeof schema>>,
 ) =>
-  useForm<T>({
-    resolver: yupResolver(object().shape(validateObject)),
+  useForm({
+    resolver: zodResolver(schema),
     ...formOptions,
   });
 

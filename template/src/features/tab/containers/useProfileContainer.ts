@@ -1,10 +1,10 @@
-import { useAppDispatch } from '@hooks';
-import { authActions } from '@store/slices/auth';
+import { useAuthStore } from '@stores';
+import isEqual from 'react-fast-compare';
 
 const useProfileContainer = () => {
-  const dispatch = useAppDispatch();
+  const clearTokens = useAuthStore(state => state.clearTokens, isEqual);
 
-  const logout = () => dispatch(authActions.logOut());
+  const logout = () => clearTokens();
 
   return { logout };
 };

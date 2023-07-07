@@ -1,8 +1,10 @@
 /* eslint-disable react-native/split-platform-components */
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
-import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
+import { useStyle, useTheme, useThrottle } from '@hooks';
+import { useCommonStore } from '@stores';
 import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
+import isEqual from 'react-fast-compare';
 import {
   ActionSheetIOS,
   ActionSheetIOSOptions,
@@ -14,9 +16,9 @@ import {
 import Divider from '../Layout/Divider';
 import List from '../List/List';
 import Modal from '../Modal/Modal';
-import PressArea from '../Pressable/PressArea';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
+import Touchable from '../Touchable/Touchable';
 
 export interface ActionSheetProps extends ActionSheetIOSOptions {
   onSelect: (buttonIndex: number) => void;
@@ -30,9 +32,9 @@ const DEFAULT_MARGIN = 8;
 const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
     const isIOS = isIos();
-    const colors = useColor();
+    const { colors } = useTheme();
     const styles = useStyle(createStyles);
-    const { theme } = useAppSelector(state => state.common);
+    const theme = useCommonStore(state => state.theme, isEqual);
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
 
@@ -66,11 +68,8 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     );
 
     const onHide = useThrottle(
-      async (buttonIndex = cancelButtonIndex) => {
-        /**
-         * @see Modal onBackdropPress below
-         */
-        if (!isIOS && typeof buttonIndex === 'number') {
+      async (buttonIndex: number = cancelButtonIndex) => {
+        if (!isIOS) {
           setIsVisible(false);
           await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
           onSelect(buttonIndex);
@@ -137,7 +136,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
     const renderOptionItem: ListRenderItem<string> = useCallback(
       ({ item, index }) => (
-        <PressArea onPress={handleSelectOption(index)} style={styles.option}>
+        <Touchable onPress={handleSelectOption(index)} style={styles.option}>
           <Text
             adjustsFontSizeToFit
             numberOfLines={1}
@@ -152,7 +151,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           >
             {item}
           </Text>
-        </PressArea>
+        </Touchable>
       ),
       [handleSelectOption, options, props.destructiveButtonIndex, props.options, styles, tintColor],
     );
@@ -165,7 +164,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         isVisible={isVisible}
         animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
         animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-        onBackdropPress={onHide}
+        onBackdropPress={() => onHide()}
       >
         <View style={styles.container}>
           <List
@@ -179,7 +178,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           <Spacer h={DEFAULT_MARGIN} />
 
           <View style={styles.optionContainer}>
-            <PressArea onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
+            <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
               <Text
                 style={[
                   styles.optionTitle,
@@ -189,7 +188,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
               >
                 {props.options[cancelButtonIndex]}
               </Text>
-            </PressArea>
+            </Touchable>
           </View>
         </View>
       </Modal>
@@ -227,8 +226,8 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     optionTitle: {
       fontSize: 18,
     },
-    optionTitleColor: (color: ColorValue) => ({
-      color,
+    optionTitleColor: (colorValue: ColorValue) => ({
+      color: colorValue,
     }),
     destructiveTitle: {
       color: colors.red,

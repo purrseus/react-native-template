@@ -1,4 +1,4 @@
-import { ProtectedScreenName, UnprotectedScreenName } from '@core/enums';
+import { ProtectedScreenName, PublicScreenName } from '@core/enums';
 import { RootStackParamList } from '@core/types';
 import { LoginScreen, RegisterScreen } from '@features/authentication/screens';
 import {
@@ -10,33 +10,37 @@ import {
   LoaderScreen,
   ModalsScreen,
   PickersScreen,
-  PressableScreen,
+  TouchableScreen,
   ShowcaseListScreen,
   SpacersScreen,
   TextsScreen,
 } from '@features/showcase/screens';
-import { useAppSelector, useStyle } from '@hooks';
+import { useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigators/options';
 import createStyles from '@navigators/styles';
 import BottomTabBar from '@navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAuthStore } from '@stores';
+import isEqual from 'react-fast-compare';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
-const UnprotectedScreens = (
+const PublicScreens = (
   <NativeStack.Group>
-    <NativeStack.Screen name={UnprotectedScreenName.Login} component={LoginScreen} />
-    <NativeStack.Screen name={UnprotectedScreenName.Register} component={RegisterScreen} />
+    <NativeStack.Screen name={PublicScreenName.Login} component={LoginScreen} />
+    <NativeStack.Screen name={PublicScreenName.Register} component={RegisterScreen} />
   </NativeStack.Group>
 );
 
 const ProtectedScreens = (
   <NativeStack.Group>
+    {/* BottomTab */}
     <NativeStack.Screen name={ProtectedScreenName.BottomTab} component={BottomTabBar} />
+
     {/* Showcase */}
     <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseListScreen} />
     <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheetsScreen} />
-    <NativeStack.Screen name={ProtectedScreenName.Pressable} component={PressableScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Touchable} component={TouchableScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={FormScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={ImagesScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Layouts} component={LayoutsScreen} />
@@ -51,17 +55,17 @@ const ProtectedScreens = (
 
 const RootNavigator = () => {
   const styles = useStyle(createStyles);
-  const { accessToken, refreshToken } = useAppSelector(state => state.auth);
-  const isAuthenticated = accessToken?.isNotEmpty && refreshToken?.isNotEmpty;
+  const isAuthenticated = useAuthStore(
+    ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
+    isEqual,
+  );
 
   return (
     <NativeStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
-      initialRouteName={
-        isAuthenticated ? UnprotectedScreenName.Login : ProtectedScreenName.BottomTab
-      }
+      initialRouteName={isAuthenticated ? PublicScreenName.Login : ProtectedScreenName.BottomTab}
     >
-      {isAuthenticated ? ProtectedScreens : UnprotectedScreens}
+      {isAuthenticated ? ProtectedScreens : PublicScreens}
     </NativeStack.Navigator>
   );
 };

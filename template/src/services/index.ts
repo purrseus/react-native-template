@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PromiseObj } from '@core/interfaces';
-import { unwrapResult } from '@reduxjs/toolkit';
-import store from '@store';
-import { fetchNewAccessToken } from '@store/slices/auth';
-import axios, { AxiosRequestConfig } from 'axios';
+import { useAuthStore } from '@stores';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Config from 'react-native-config';
 
-type OriginalRequest = (AxiosRequestConfig & { retry?: boolean }) | undefined;
+type OriginalRequest = AxiosRequestConfig & { retry?: boolean };
+
+let isTokenRefreshing = false;
 
 const UNAUTHORIZED_STATUS = 401;
 
@@ -26,7 +26,14 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
   promiseQueue.length = 0;
 };
 
-let isTokenRefreshing = false;
+const handleRefreshToken = async () => {
+  const response = await axios.post<AxiosResponse<{ accessToken?: string }>>(
+    `${Config.API_URL}/auth/refresh-token`,
+    { refreshToken: useAuthStore.getState().refreshToken },
+  );
+
+  return response.data.accessToken;
+};
 
 const axiosInstance = axios.create({
   baseURL: Config.API_URL,
@@ -40,34 +47,27 @@ const setDefaultAccessToken = (accessToken: string | null) => {
 };
 
 axiosInstance.interceptors.request.use(
-  config => {
-    if (config.data instanceof FormData) {
-      config.headers ??= {};
-      config.headers['Content-Type'] = 'multipart/form-data';
-    }
-
-    return config;
-  },
+  config => config,
   requestError => Promise.reject(requestError),
 );
 
 axiosInstance.interceptors.response.use(
   response => response.data,
   async responseError => {
-    const originalRequest: OriginalRequest = responseError?.config;
+    const originalRequest: OriginalRequest = responseError.config;
     const isUnauthorized = responseError?.response?.status === UNAUTHORIZED_STATUS;
 
     const shouldHandleToken =
-      isUnauthorized && !!originalRequest?.headers && !originalRequest?.retry;
+      isUnauthorized && !!originalRequest.headers && !originalRequest?.retry;
 
-    if (!shouldHandleToken) return Promise.reject(responseError);
+    if (!shouldHandleToken || !originalRequest.headers) return Promise.reject(responseError);
 
     // Use accessToken from global state if originalRequest.headers.Authorization is undefined
-    if (!originalRequest.headers!.Authorization) {
-      const { accessToken } = store.getState().auth;
+    if (!originalRequest.headers.Authorization) {
+      const accessToken = useAuthStore.getState().accessToken;
       if (accessToken) {
         setDefaultAccessToken(accessToken);
-        originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axiosInstance(originalRequest);
       }
     }
@@ -79,7 +79,7 @@ axiosInstance.interceptors.response.use(
           promiseQueue.push({ resolve, reject });
         });
 
-        originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axiosInstance(originalRequest);
       } catch (error) {
         return Promise.reject(error);
@@ -90,14 +90,16 @@ axiosInstance.interceptors.response.use(
     try {
       isTokenRefreshing = true;
       originalRequest.retry = true;
-      const resultAction = await store.dispatch(fetchNewAccessToken());
-      const accessToken = unwrapResult(resultAction);
+      const accessToken = await handleRefreshToken();
+      if (!accessToken) throw new Error('');
 
+      useAuthStore.getState().setTokens({ accessToken });
       setDefaultAccessToken(accessToken);
-      originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       return axiosInstance(originalRequest).finally(() => handlePromiseQueue(accessToken));
     } catch (error) {
+      useAuthStore.getState().clearTokens();
       setDefaultAccessToken(null);
       handlePromiseQueue(undefined, error);
 

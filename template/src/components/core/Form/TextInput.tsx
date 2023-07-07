@@ -12,7 +12,7 @@ import Text from '../Text/Text';
 type MixinTextInputProps<T extends boolean = false> = (T extends true
   ? MultilineTextInputProps
   : IconTextInputProps) &
-  Omit<CommonFieldProps<string>, 'onChange'>;
+  CommonFieldProps<string, true>;
 
 type TextInputProps<T extends boolean = false> = {
   multiline?: T;

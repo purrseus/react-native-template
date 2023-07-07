@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const usePressableContainer = () => {
+const useTouchableContainer = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,4 +24,4 @@ const usePressableContainer = () => {
   };
 };
 
-export default usePressableContainer;
+export default useTouchableContainer;

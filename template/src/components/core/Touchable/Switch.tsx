@@ -19,7 +19,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import ActivityIndicator from '../Loader/ActivityIndicator';
-import PressArea from './PressArea';
+import Touchable from './Touchable';
 
 interface SwitchProps extends ViewProps {
   isEnabled: boolean;
@@ -36,7 +36,7 @@ const TRACK_HEIGHT = 32;
 const THUMB_SIZE = TRACK_HEIGHT;
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
-const AnimatedPressArea = Animated.createAnimatedComponent(PressArea);
+const AnimatedTouchable = Animated.createAnimatedComponent(Touchable);
 
 const Switch = compareMemo<SwitchProps>(
   ({
@@ -50,6 +50,7 @@ const Switch = compareMemo<SwitchProps>(
     ...props
   }) => {
     const styles = useStyle(createStyles);
+    const isAndroidPlatform = isAndroid();
     const [trackActiveColor, trackInactiveColor] = styles.trackColor as (string | number)[];
     const [thumbActiveColor, thumbInactiveColor] = styles.thumbColor as (string | number)[];
     const statusAnimated = useSharedValue(+isEnabled);
@@ -75,7 +76,7 @@ const Switch = compareMemo<SwitchProps>(
       const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
-        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid() ? scale : 1 }],
+        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroidPlatform ? scale : 1 }],
         backgroundColor: backgroundColor as ColorValue,
       };
     }, [disabled, isEnabled]);
@@ -88,7 +89,7 @@ const Switch = compareMemo<SwitchProps>(
 
     return (
       <View {...props} style={[styles.container, style]}>
-        <AnimatedPressArea
+        <AnimatedTouchable
           onPress={handleChangeValue}
           disabled={disabled || loading}
           style={[styles.track, trackAnimatedStyle]}
@@ -108,7 +109,7 @@ const Switch = compareMemo<SwitchProps>(
               )}
             </Animated.View>
           </View>
-        </AnimatedPressArea>
+        </AnimatedTouchable>
       </View>
     );
   },

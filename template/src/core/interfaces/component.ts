@@ -2,13 +2,13 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ImageRequireSource } from 'react-native';
 
-export interface CommonFieldProps<T = any> {
+export interface CommonFieldProps<T = any, I = false> {
   name: string;
   label?: string;
   errorText?: string;
   value?: T;
-  onChange?: (value: T) => void;
-  onChangeText?: (text: T) => void;
+  onChange?: I extends true ? unknown : (value: T) => void;
+  onChangeText?: I extends true ? (text: T) => void : unknown;
 }
 
 export interface AppBarAction {

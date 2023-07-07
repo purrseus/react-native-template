@@ -11,15 +11,15 @@ const appCenterAppName = {
   '🍎 iOS': '<Your_iOS_app_name>',
 };
 
-const platformName = {
-  android: '🤖 Android',
-  ios: '🍎 iOS',
-};
-
 const gitBranches = {
   Development: 'develop',
   Staging: 'staging',
   Production: 'main',
+};
+
+const platformName = {
+  android: '🤖 Android',
+  ios: '🍎 iOS',
 };
 
 export const platformBuildTypes = {
@@ -52,7 +52,7 @@ export const createQuestions = async questions => {
   return answers;
 };
 
-export const uncapitalized = text =>
+export const uncapitalize = text =>
   typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
 
 export const getArguments = () => process.argv.slice(2);

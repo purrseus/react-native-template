@@ -10,14 +10,14 @@ import {
   ViewStyle,
 } from 'react-native';
 
-export interface PressAreaProps extends PressableProps {
+export interface TouchableProps extends PressableProps {
   throttle?: number;
   hitSlop?: number;
   pressInStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
 }
 
-const PressArea = compareMemo<View, PressAreaProps>(
+const Touchable = compareMemo<View, TouchableProps>(
   forwardRef(
     ({ throttle = duration({ seconds: 0.5 }), onPress, pressInStyle, style, ...props }, ref) => {
       const handleOnPress = useThrottle(onPress || (() => null), [onPress], throttle);
@@ -42,4 +42,4 @@ const PressArea = compareMemo<View, PressAreaProps>(
   ),
 );
 
-export default PressArea;
+export default Touchable;

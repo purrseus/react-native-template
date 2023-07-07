@@ -29,13 +29,18 @@
 - Lots of built-in components
 - Minimal additional dependencies
 - Dark mode support
+- Internationalization framework using [I18next](https://react.i18next.com/)
 - Lint commit messages using [Commitlint](https://github.com/conventional-changelog/commitlint)
 - Multiple environment configurations using [React Native Config](https://github.com/luggit/react-native-config)
-- State management using [Redux Toolkit](https://redux-toolkit.js.org)
+- Client-state management using [Zustand](https://zustand-demo.pmnd.rs)
+- Server-state management using [React Query](https://tanstack.com/query)
 - Local storage using [MMKV](https://github.com/mrousavy/react-native-mmkv)
-- Routing and navigation using [React Navigation](https://reactnavigation.org/)
+- Routing and navigation using [React Navigation](https://reactnavigation.org)
 - API requests using [Axios](https://axios-http.com)
 - Debug tool using [Flipper](https://fbflipper.com)
+- Schema validation using [Zod](https://zod.dev)
+- OTA update using [CodePush](https://github.com/microsoft/react-native-code-push)
+- [FlashList](https://shopify.github.io/flash-list), [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated), [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler) and [more](./template/package.json)
 
 ## :grey_exclamation: Requirements
 
@@ -75,7 +80,7 @@ yarn setup:code-push
 
 ```sh
 sudo keytool -genkey -v -keystore development.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-# replace development for your environment, and replace my-key-alias for your alias
+# replace "development" for your environment, and replace "my-key-alias" for your alias
 ```
 
 > **Warning**

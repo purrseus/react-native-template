@@ -1,26 +1,24 @@
-import { useState } from 'react';
+import tailwind from '@/libs/tailwind';
+import { useCommonStore } from '@/stores';
+import { useAppColorScheme } from 'twrnc';
 
 const useTouchableContainer = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [theme, changeTheme] = useCommonStore(state => [state.theme, state.changeTheme]);
+  const [, , setColorScheme] = useAppColorScheme(tailwind);
 
-  const onPress = async (value: boolean) => {
-    setIsLoading(true);
-    setIsEnabled(value);
-    try {
-      await wait(duration({ seconds: 0.5 }));
-      throw new Error('test');
-    } catch (error) {
-      setIsEnabled(!value);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSwitchPress = () => {
+    changeTheme(theme === 'dark' ? 'light' : 'dark');
+    setColorScheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  const onButtonPress = () => {
+    changeTheme('auto');
   };
 
   return {
-    isEnabled,
-    isLoading,
-    onPress,
+    isSwitchEnabled: theme === 'dark',
+    onSwitchPress,
+    onButtonPress,
   };
 };
 

@@ -1,4 +1,4 @@
-import { ONE_SECOND } from '@core/constants';
+import { ONE_SECOND } from '@/core/constants';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Options {
@@ -7,11 +7,11 @@ interface Options {
   onTimeout?: () => void;
 }
 
-const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) => {
-  const getTimeEnd = useCallback(() => Date.now() + duration, [duration]);
+const getTimeEnd = (duration: number) => Date.now() + duration;
 
+const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) => {
   const timer = useRef<NodeJS.Timer | null>(null);
-  const endTime = useRef(getTimeEnd());
+  const endTime = useRef(getTimeEnd(duration));
   const [currentTime, setCurrentTime] = useState(duration);
 
   const stop = useCallback(
@@ -19,16 +19,16 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
       const isReplay = !!replayCallback;
       if (timer.current) clearInterval(timer.current);
       timer.current = null;
-      if (isReplay) endTime.current = getTimeEnd();
+      if (isReplay) endTime.current = getTimeEnd(duration);
       setCurrentTime(isReplay ? duration : 0);
       replayCallback?.();
     },
-    [duration, getTimeEnd],
+    [duration],
   );
 
   const play = useCallback(() => {
     if (timer.current) return;
-    if (!autoStart) endTime.current = getTimeEnd();
+    if (!autoStart) endTime.current = getTimeEnd(duration);
     timer.current = setInterval(() => {
       const current = Date.now() - ONE_SECOND;
       if (current >= endTime.current) {
@@ -38,7 +38,7 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
       }
       setCurrentTime(endTime.current - current);
     }, ONE_SECOND);
-  }, [stop, onTimeout, autoStart, getTimeEnd]);
+  }, [autoStart, duration, onTimeout, stop]);
 
   const replay = useCallback(() => stop(play), [stop, play]);
 
@@ -47,7 +47,7 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
     return () => stop();
   }, [autoStart, play, stop]);
 
-  return { currentTime, play, replay };
+  return { currentTime, play, replay, stop };
 };
 
 export default useCountdownTimer;

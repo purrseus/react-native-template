@@ -1,17 +1,20 @@
-import { Language } from '@core/types';
-import i18n from '@i18n';
-import { createPersistenceStore } from '@utilities/store';
+import { Language } from '@/core/types';
+import i18n from '@/libs/i18n';
+import { createPersistenceStore } from '@/utils/store';
 
 type Theme = 'auto' | 'light' | 'dark';
 
-interface CommonState {
+type CommonState = {
   theme: Theme;
   language: Language;
+};
+
+type CommonActions = {
   changeLanguage: (language: Language) => void;
   changeTheme: (theme: Theme) => void;
-}
+};
 
-const useCommonStore = createPersistenceStore<CommonState>(
+const useCommonStore = createPersistenceStore<CommonState & CommonActions>(
   'common',
   set => ({
     theme: 'auto',

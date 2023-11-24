@@ -4,7 +4,7 @@ import {
   createQuestions,
   execScriptSync,
   getArguments,
-  platformBuildTypes,
+  platformInfo,
   uncapitalize,
 } from './utils.mjs';
 
@@ -16,18 +16,23 @@ import {
   };
 
   const [arg] = getArguments();
-  const openXCode = () => execScriptSync(commands.openXcode());
 
   if (arg === 'xcode') {
-    openXCode();
+    execScriptSync(commands.openXCode());
     return;
   }
 
   const { env, buildType } = await createQuestions(createBuildQuestionCollections('ios'));
+  const uncapitalizedENV = uncapitalize(env);
 
-  if (platformBuildTypes.ios.includes(buildType)) {
-    openXCode();
+  if (platformInfo.buildTypes.ios.includes(buildType)) {
+    execScriptSync(commands.openXCode());
   } else {
-    execScriptSync(commands.runIos(uncapitalize(env), buildType, envShorts[env]));
+    execScriptSync(
+      commands.withFirebase(
+        uncapitalizedENV,
+        commands.runIos(uncapitalizedENV, buildType, envShorts[env]),
+      ),
+    );
   }
 })();

@@ -1,4 +1,4 @@
-import { Measure } from '@core/interfaces';
+import { Measure } from '@/core/interfaces';
 import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
@@ -16,14 +16,14 @@ const useMeasure = <T extends View>({ flexiblePosition = true }: Options) => {
     pageX: 0,
     pageY: 0,
   });
-  const hasMeasureValue = Object.values(measure).some(Boolean);
+  const hasMeasureValues = Object.values(measure).some(Boolean);
 
   useEffect(() => {
     ref.current?.measure((x, y, width, height, pageX, pageY) => {
-      if (hasMeasureValue && !flexiblePosition) return;
+      if (hasMeasureValues && !flexiblePosition) return;
       setMeasure({ x, y, width, height, pageX, pageY });
     });
-  }, [hasMeasureValue, flexiblePosition]);
+  }, [hasMeasureValues, flexiblePosition]);
 
   return { measure, ref };
 };

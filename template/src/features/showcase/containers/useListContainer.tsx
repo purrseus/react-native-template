@@ -1,5 +1,7 @@
+import { QueryKey } from '@/core/enums';
+
 const useListContainer = () => {
-  const photosQueryKey = ['photos'];
+  const photosQueryKey = [QueryKey.Photos];
 
   return { photosQueryKey };
 };

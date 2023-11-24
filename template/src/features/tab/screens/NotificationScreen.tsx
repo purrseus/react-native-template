@@ -1,13 +1,13 @@
-import { Text } from '@components/core';
-import { globalStyles } from '@themes';
+import { Text } from '@/components/core';
+import { useTailwind } from '@/hooks';
 import { View } from 'react-native';
 
-const NotificationScreen = () => {
+export default function NotificationScreen() {
+  const tw = useTailwind();
+
   return (
-    <View style={globalStyles.flexFillCenter}>
+    <View style={tw`flex-fill-center`}>
       <Text>NotificationScreen</Text>
     </View>
   );
-};
-
-export default NotificationScreen;
+}

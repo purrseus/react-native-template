@@ -3,7 +3,7 @@ import {
   createBuildQuestionCollections,
   createQuestions,
   execScriptSync,
-  platformBuildTypes,
+  platformInfo,
   uncapitalize,
 } from './utils.mjs';
 
@@ -20,10 +20,21 @@ import {
   };
 
   const { env, buildType } = await createQuestions(createBuildQuestionCollections('android'));
+  const uncapitalizedENV = uncapitalize(env);
 
-  if (platformBuildTypes.android.includes(buildType)) {
-    execScriptSync(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));
+  if (platformInfo.buildTypes.android.includes(buildType)) {
+    execScriptSync(
+      withFirebase(
+        uncapitalizedENV,
+        commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`),
+      ),
+    );
   } else {
-    execScriptSync(commands.runAndroid(uncapitalize(`${env}${buildType}`), suffixAppId[env]));
+    execScriptSync(
+      commands.withFirebase(
+        uncapitalizedENV,
+        commands.runAndroid(uncapitalize(`${env}${buildType}`), suffixAppId[env]),
+      ),
+    );
   }
 })();

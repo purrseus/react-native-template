@@ -1,37 +1,25 @@
-import { DateTimePicker, ImagePicker } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { withHook } from '@utilities';
+import { DateTimePicker } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { withHook } from '@/utils';
 import { Separator, ShowcaseItem } from '../components';
 import { usePickerContainer } from '../containers';
+import { useTailwind } from '@/hooks';
 
 const PickersScreen = withHook(
   usePickerContainer,
-  ({
-    images,
-    setImages,
-    dateTime,
-    setDateTime,
-    imagePickerRef,
-    dateTimePickerRef,
-    showImagePicker,
-    showDateTimePicker,
-  }) => {
-    const styles = useStyle(createStyles);
+  ({ dateTime, setDateTime, dateTimePickerRef, showImagePicker, showDateTimePicker }) => {
+    const tw = useTailwind();
 
     return (
       <StackContainer
         title={ProtectedScreenName.Pickers}
         wrapperType="scrollView"
-        wrapperStyle={styles.scrollView}
+        wrapperStyle={tw`py-4`}
       >
         <ShowcaseItem title="Show ImagePicker" onPress={showImagePicker} />
         <Separator />
         <ShowcaseItem title="Show DateTimePicker" onPress={showDateTimePicker} />
-
-        <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
 
         <DateTimePicker
           mode="time"
@@ -43,12 +31,5 @@ const PickersScreen = withHook(
     );
   },
 );
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    scrollView: {
-      paddingVertical: 16,
-    },
-  });
 
 export default PickersScreen;

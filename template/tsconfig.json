@@ -5,22 +5,8 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Modules */
-    "baseUrl": "./src",                                  /* Base directory to resolve non-absolute module names. */
     "paths": {
-      "@*": ["./*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@core/*": ["core/*"],
-      "@features/*": ["features/*"],
-      "@hooks/*": ["hooks/*"],
-      "@i18n/*": ["i18n/*"],
-      "@layouts/*": ["layouts/*"],
-      "@navigators/*": ["navigators/*"],
-      "@providers/*": ["providers/*"],
-      "@services/*": ["services/*"],
-      "@stores/*": ["stores/*"],
-      "@themes/*": ["themes/*"],
-      "@utilities/*": ["utilities/*"]
+      "@/*": ["./src/*"]
     },                                                   /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
 
     /* Type Checking */

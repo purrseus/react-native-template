@@ -1,4 +1,4 @@
-import { RootStackParamList } from '@core/types';
+import { RootStackParamList } from '@/core/types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const useAppNavigation = <R extends keyof RootStackParamList>() =>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ONE_SECOND } from '@core/constants';
+import { ONE_SECOND } from '@/core/constants';
 import { throttle } from 'lodash';
 import { DependencyList, useCallback } from 'react';
 

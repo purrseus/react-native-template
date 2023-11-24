@@ -1,5 +1,8 @@
-import { Divider } from '@components/core';
+import { useTailwind } from '@/hooks';
+import { StyleSheet, View } from 'react-native';
 
-const Separator = () => <Divider marginVertical={16} />;
+export default function Separator() {
+  const tw = useTailwind();
 
-export default Separator;
+  return <View style={tw`border-[${StyleSheet.hairlineWidth}px] my-4 border-zinc-400`} />;
+}

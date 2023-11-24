@@ -1,6 +1,5 @@
-import { Spacer } from '@components/core';
-import { ProtectedScreenName } from '@core/enums';
-import { ProtectedScreenProps } from '@core/types';
+import { ProtectedScreenName } from '@/core/enums';
+import { ProtectedScreenProps } from '@/core/types';
 import { ListRenderItem } from 'react-native';
 import { ShowcaseItem } from '../components';
 
@@ -12,7 +11,6 @@ const useShowcaseListContainer = ({
     ProtectedScreenName.Touchable,
     ProtectedScreenName.Form,
     ProtectedScreenName.Images,
-    ProtectedScreenName.Layouts,
     ProtectedScreenName.List,
     ProtectedScreenName.Loader,
     ProtectedScreenName.Modals,
@@ -26,9 +24,7 @@ const useShowcaseListContainer = ({
     <ShowcaseItem title={item} onPress={() => navigate(item as any)} />
   );
 
-  const ItemSeparatorComponent = () => <Spacer h={16} />;
-
-  return { data, renderItem, ItemSeparatorComponent };
+  return { data, renderItem };
 };
 
 export default useShowcaseListContainer;

@@ -1,35 +1,23 @@
-import { Touchable, Text } from '@components/core';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { Text, Touchable } from '@/components/core';
+import { useTailwind } from '@/hooks';
+import { compareMemo } from '@/utils';
 
 interface ShowcaseItemProps {
   title: string;
   onPress: () => void;
 }
 
-const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
-  const styles = useStyle(createStyles);
+function ShowcaseItem({ title, onPress }: ShowcaseItemProps) {
+  const tw = useTailwind();
 
   return (
-    <Touchable onPress={onPress} style={styles.item}>
-      <Text style={styles.itemText}>{title}</Text>
+    <Touchable
+      onPress={onPress}
+      style={tw`p-4 rounded-lg items-center bg-zinc-300 dark:bg-zinc-700`}
+    >
+      <Text style={tw`text-base font-bold`}>{title}</Text>
     </Touchable>
   );
-});
+}
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    item: {
-      padding: 16,
-      backgroundColor: colors.backgroundImage,
-      borderRadius: 8,
-      alignItems: 'center',
-    },
-    itemText: {
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
-  });
-
-export default ShowcaseItem;
+export default compareMemo(ShowcaseItem);

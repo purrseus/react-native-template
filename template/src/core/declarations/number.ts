@@ -13,4 +13,9 @@ Object.defineProperties(Number.prototype, {
   },
 });
 
+Number.prototype.isValidIndex = function (array) {
+  const number = this.valueOf();
+  return Number.isInteger(number) && number >= 0 && number < array.length;
+};
+
 export {};

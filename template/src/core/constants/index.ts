@@ -1,4 +1,4 @@
-import { LanguageMap, Locale } from '@core/types';
+import { LanguageMap, Locale } from '@/core/types';
 import { Insets } from 'react-native';
 import { LinearGradientProps } from 'react-native-linear-gradient';
 import { Edge } from 'react-native-safe-area-context';
@@ -13,14 +13,8 @@ export const DEFAULT_FONT_SIZE = 14;
 export const MIN_HEIGHT_INPUT = DEFAULT_FONT_SIZE + 6;
 export const MAX_HEIGHT_INPUT = 220;
 export const PADDING_VERTICAL_INPUT = 12;
-export const DEFAULT_ICON_SIZE = 24;
 export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
 export const DEFAULT_HIT_SLOP: Readonly<Insets> = { top: 8, bottom: 8, left: 8, right: 8 };
-//#endregion
-
-//#region formats
-export const DEFAULT_DATE_TIME_FORMAT_TEMPLATE = 'DD/MMM/YYYY HH:mm';
-export const DEFAULT_NUMBER_FORMAT_TEMPLATE = '0,0';
 //#endregion
 
 //#region styles

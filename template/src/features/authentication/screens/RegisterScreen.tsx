@@ -1,14 +1,15 @@
-import { Button, Spacer } from '@components/core';
-import { globalStyles } from '@themes';
-import { withHook } from '@utilities';
+import { Button } from '@/components/core';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { Text, View } from 'react-native';
 import { useRegisterContainer } from '../containers';
 
 const RegisterScreen = withHook(useRegisterContainer, ({ goBack }) => {
+  const tw = useTailwind();
+
   return (
-    <View style={globalStyles.flexFillCenter}>
+    <View style={tw`flex-fill-center gap-y-4`}>
       <Text>RegisterScreen</Text>
-      <Spacer h={16} />
       <Button title="Go back" onPress={goBack} />
     </View>
   );

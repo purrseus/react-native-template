@@ -1,7 +1,7 @@
 import { execScriptSync, getArguments } from './utils.mjs';
 
 (() => {
-  const folderNames = ['components', 'containers', 'screens', 'services', 'utilities'];
+  const folderNames = ['components', 'containers', 'screens', 'services', 'utils'];
   const [featureName, _targetPath = ''] = getArguments();
   if (!featureName) throw new SyntaxError('Missing folder name!');
   const featurePath = './src/features/';

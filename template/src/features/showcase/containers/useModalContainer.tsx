@@ -1,11 +1,8 @@
-import { Alert, Text } from '@components/core';
+import { Alert, Text } from '@/components/core';
 import { useState } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const useModalContainer = () => {
-  const { bottom } = useSafeAreaInsets();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isBottomModalVisible, setIsBottomModalVisible] = useState(false);
 
   const ModalTexts = createAscendingOrderArray(10).map((it, i) => (
     <Text key={i}>{it.toString().repeat(i + 1)}</Text>
@@ -15,22 +12,14 @@ const useModalContainer = () => {
 
   const dismissModal = () => setIsModalVisible(false);
 
-  const openBottomModal = () => setIsBottomModalVisible(true);
-
-  const dismissBottomModal = () => setIsBottomModalVisible(false);
-
   const showAlert = () => Alert('This is a title', 'This is a message');
 
   return {
-    isModalVisible,
-    isBottomModalVisible,
     openModal,
-    dismissModal,
-    openBottomModal,
-    dismissBottomModal,
-    ModalTexts,
     showAlert,
-    bottomModalSafeArea: bottom,
+    isModalVisible,
+    dismissModal,
+    ModalTexts,
   };
 };
 

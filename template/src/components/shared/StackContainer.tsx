@@ -1,48 +1,51 @@
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { globalStyles } from '@themes';
-import { compareMemo } from '@utilities';
-import { ScrollView, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import { useTailwind } from '@/hooks';
+import { compareMemo } from '@/utils';
+import { useMemo } from 'react';
+import { ScrollView, View, ViewProps } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Style } from 'twrnc/dist/esm/types';
 import AppBar, { AppBarProps } from './AppBar';
 
 interface StackContainerProps extends ViewProps {
   wrapperType?: 'scrollView' | 'view';
   title?: AppBarProps['title'];
   appBarProps?: AppBarProps;
-  wrapperStyle?: StyleProp<ViewStyle>;
+  wrapperStyle?: Style;
+  style?: Style;
 }
 
-const StackContainer = compareMemo<StackContainerProps>(
-  ({ title, wrapperType = 'view', appBarProps, wrapperStyle, style, children, ...props }) => {
-    const styles = useStyle(createStyles);
-    const Wrapper = wrapperType === 'scrollView' ? ScrollView : View;
+function StackContainer({
+  title,
+  wrapperType = 'view',
+  appBarProps,
+  wrapperStyle,
+  style,
+  children,
+  ...props
+}: StackContainerProps) {
+  const tw = useTailwind();
+  const edgeInsets = useSafeAreaInsets();
+  const Wrapper = wrapperType === 'scrollView' ? ScrollView : View;
 
-    return (
-      <View {...props} style={[globalStyles.flexFill, style]}>
-        {!!title && <AppBar title={title} {...appBarProps} />}
-        <Wrapper
-          style={[styles.wrapper, wrapperType !== 'scrollView' && wrapperStyle]}
-          {...(wrapperType === 'scrollView' && {
-            contentContainerStyle: [styles.contentContainer, wrapperStyle],
-            automaticallyAdjustsScrollIndicatorInsets: false,
-          })}
-        >
-          {children}
-        </Wrapper>
-      </View>
-    );
-  },
-);
+  const wrapperProps = useMemo(
+    () => ({
+      contentContainerStyle: tw.style(`px-4 pb-[${edgeInsets.bottom}px]`, wrapperStyle),
+      automaticallyAdjustsScrollIndicatorInsets: false,
+    }),
+    [edgeInsets.bottom, wrapperStyle, tw],
+  );
 
-const createStyles = ({ create, edgeInsets }: StyleCallbackParams) =>
-  create({
-    wrapper: {
-      flex: 1,
-    },
-    contentContainer: {
-      paddingHorizontal: 16,
-      paddingBottom: edgeInsets.bottom,
-    },
-  });
+  return (
+    <View {...props} style={tw.style('flex-1', style)}>
+      {!!title && <AppBar title={title} {...appBarProps} />}
+      <Wrapper
+        style={tw.style('flex-1', wrapperType !== 'scrollView' && wrapperStyle)}
+        {...(wrapperType === 'scrollView' && wrapperProps)}
+      >
+        {children}
+      </Wrapper>
+    </View>
+  );
+}
 
-export default StackContainer;
+export default compareMemo(StackContainer);

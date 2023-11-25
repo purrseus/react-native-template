@@ -1,5 +1,5 @@
-import { CheckboxItem } from '@core/interfaces';
-import { useAppForm } from '@hooks';
+import { CheckboxItem } from '@/core/interfaces';
+import { useAppForm } from '@/hooks';
 import { useMemo } from 'react';
 import { z } from 'zod';
 
@@ -8,18 +8,18 @@ enum OS {
   Ios,
 }
 
-const useFormContainer = () => {
-  const checkboxData: CheckboxItem<OS>[] = [
-    { label: 'Android', value: OS.Android },
-    { label: 'iOS', value: OS.Ios },
-  ];
+const checkboxData: CheckboxItem<OS>[] = [
+  { label: 'Android', value: OS.Android },
+  { label: 'iOS', value: OS.Ios },
+];
 
+const useFormContainer = () => {
   const formSchema = useMemo(
     () =>
       z.object({
         firstName: z.string(),
         lastName: z.string(),
-        age: z.string().regex(/\d+/),
+        age: z.string().regex(/^\d+$/),
         address: z.string(),
         gender: z.enum(['Male', 'Female']),
         phones: z.array(z.nativeEnum(OS)),

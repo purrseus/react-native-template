@@ -1,3 +1,6 @@
+/**
+ * @type {import('@babel/core').TransformOptions}
+ */
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
@@ -6,21 +9,13 @@ module.exports = {
       {
         root: ['.'],
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
-        alias: {
-          '@assets': './src/assets',
-          '@components': './src/components',
-          '@core': './src/core',
-          '@features': './src/features',
-          '@hooks': './src/hooks',
-          '@i18n': './src/i18n',
-          '@layouts': './src/layouts',
-          '@navigators': './src/navigators',
-          '@providers': './src/providers',
-          '@services': './src/services',
-          '@stores': './src/stores',
-          '@themes': './src/themes',
-          '@utilities': './src/utilities',
-        },
+        alias: { '@': './src' },
+      },
+    ],
+    [
+      'babel-plugin-inline-import',
+      {
+        extensions: ['.svg'],
       },
     ],
     'react-native-reanimated/plugin',

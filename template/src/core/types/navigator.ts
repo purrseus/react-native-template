@@ -1,4 +1,4 @@
-import { ProtectedScreenName, TabScreenName, PublicScreenName } from '@core/enums';
+import { ProtectedScreenName, TabScreenName, PublicScreenName } from '@/core/enums';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type PublicParamList = {
@@ -21,7 +21,6 @@ export type ProtectedParamList = {
   [ProtectedScreenName.Touchable]: undefined;
   [ProtectedScreenName.Form]: undefined;
   [ProtectedScreenName.Images]: undefined;
-  [ProtectedScreenName.Layouts]: undefined;
   [ProtectedScreenName.List]: undefined;
   [ProtectedScreenName.Loader]: undefined;
   [ProtectedScreenName.Modals]: undefined;

@@ -21,7 +21,7 @@ declare global {
    * @param value A JavaScript value, usually an object or array, to be converted.
    * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
    */
-  function referenceTypeFormatter(
+  function formatReferenceType(
     value: Parameters<typeof JSON.stringify>[0],
     space?: Parameters<typeof JSON.stringify>[2],
   ): ReturnType<typeof JSON.stringify>;
@@ -30,9 +30,7 @@ declare global {
    * Generate duration in milliseconds.
    * @param time Numeric units in milliseconds.
    */
-  function duration(
-    time: Partial<Record<'days' | 'hours' | 'minutes' | 'seconds' | 'milliseconds', number>>,
-  ): number;
+  function duration(time: Partial<Record<'d' | 'h' | 'm' | 's' | 'ms', number>>): number;
 
   /**
    * It will cause the program to pause for a specified amount of time in milliseconds.
@@ -92,6 +90,12 @@ declare global {
      * Return true if and only if this number is even.
      */
     isEven: boolean;
+
+    /**
+     * Returns true if the number is a valid index in the array.
+     * @param array The array you want to check.
+     */
+    isValidIndex(array: any[]): boolean;
   }
 
   interface ObjectConstructor {

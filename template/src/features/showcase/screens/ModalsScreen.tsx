@@ -1,85 +1,38 @@
-import { Button, Modal, Spacer } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { globalStyles } from '@themes';
-import { withHook } from '@utilities';
+import { Button, Modal } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { View } from 'react-native';
 import { ShowcaseItem } from '../components';
 import { useModalContainer } from '../containers';
 
 const ModalsScreen = withHook(
   useModalContainer,
-  ({
-    openModal,
-    openBottomModal,
-    showAlert,
-    isModalVisible,
-    dismissModal,
-    ModalTexts,
-    isBottomModalVisible,
-    dismissBottomModal,
-    bottomModalSafeArea,
-  }) => {
-    const styles = useStyle(createStyles);
+  ({ openModal, showAlert, isModalVisible, dismissModal, ModalTexts }) => {
+    const tw = useTailwind();
 
     return (
       <>
         <StackContainer
           title={ProtectedScreenName.Modals}
           wrapperType="scrollView"
-          wrapperStyle={globalStyles.flexFillCenter}
+          wrapperStyle={tw`flex-fill-center gap-y-4`}
         >
           <ShowcaseItem title="Show modal" onPress={openModal} />
-          <Spacer h={16} />
-          <ShowcaseItem title="Show bottom modal" onPress={openBottomModal} />
-          <Spacer h={16} />
           <ShowcaseItem title="Show alert" onPress={showAlert} />
         </StackContainer>
 
         <Modal isVisible={isModalVisible} onBackdropPress={dismissModal}>
-          <View style={[styles.modal, styles.modalContainer]}>
-            {ModalTexts}
-
-            <Spacer h={16} />
+          <View style={tw`bg-white dark:bg-zinc-700 p-4 mx-8 rounded-xl gap-y-4`}>
+            <View>{ModalTexts}</View>
 
             <Button title="Dismiss modal" onPress={dismissModal} />
-          </View>
-        </Modal>
-
-        <Modal
-          isVisible={isBottomModalVisible}
-          type="bottomSheet"
-          onBackdropPress={dismissBottomModal}
-        >
-          <View style={[styles.modal, styles.bottomModalContainer]}>
-            {ModalTexts}
-
-            <Spacer h={16} />
-
-            <Button title="Dismiss modal" onPress={dismissBottomModal} />
-            <Spacer h={bottomModalSafeArea} />
           </View>
         </Modal>
       </>
     );
   },
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    modal: {
-      backgroundColor: colors.white,
-      padding: 16,
-    },
-    modalContainer: {
-      marginHorizontal: 32,
-      borderRadius: 12,
-    },
-    bottomModalContainer: {
-      paddingBottom: 0,
-    },
-  });
 
 export default ModalsScreen;

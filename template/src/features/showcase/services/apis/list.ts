@@ -1,26 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import axiosInstance from '@services';
-import { QueryFunction } from '@tanstack/react-query';
-import { AxiosRequestConfig } from 'axios';
-import { photosAdapter } from '../adapters';
+import http from '@/services';
+import { QueryFunctionContext } from '@tanstack/react-query';
+import { PhotosSchema } from '../schemas';
 
-const getPhotos: QueryFunction<ReturnType<typeof photosAdapter>> = async ({
-  pageParam = 1,
-  signal,
-}) => {
-  const photos = await axiosInstance.get<any, AxiosRequestConfig>('/photos', {
-    params: {
-      _limit: 10,
-      _page: pageParam,
-    },
-    signal,
-  });
-
-  return photosAdapter(photos);
-};
+const fetchPhotos = http.responseDataAdapter(
+  PhotosSchema,
+  ({ pageParam = 1, signal }: QueryFunctionContext) =>
+    http.get('/photos', {
+      params: {
+        _limit: 10,
+        _page: pageParam,
+      },
+      signal,
+    }),
+);
 
 const listAPI = {
-  getPhotos,
+  fetchPhotos,
 };
 
 export default listAPI;

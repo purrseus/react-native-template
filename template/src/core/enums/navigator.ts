@@ -11,7 +11,6 @@ export enum ProtectedScreenName {
   Touchable = 'Touchable',
   Form = 'Form',
   Images = 'Images',
-  Layouts = 'Layouts',
   List = 'List',
   Loader = 'Loader',
   Modals = 'Modals',

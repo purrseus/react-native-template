@@ -1,23 +1,28 @@
-import { writeFileSync } from 'fs';
-import { execScriptSync, loadEnvFile, getArguments } from './utils.mjs';
+/* eslint-disable no-console */
+import { execScriptSync, getArguments, commands } from './utils.mjs';
+
+const writeJSONFile = `cat <<EOF > ./android/app/src/main/assets/appcenter-config.json
+{
+  "app_secret": "$ANDROID_APP_SECRET_KEY"
+}
+EOF
+`;
+
+const writePlistFile = `cat <<EOF > ./ios/AppCenter-Config.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>AppSecret</key>
+    <string>$IOS_APP_SECRET_KEY</string>
+  </dict>
+</plist>
+EOF
+`;
 
 const setupCodePush = () => {
-  const { ANDROID_APP_SECRET_KEY, IOS_APP_SECRET_KEY } = loadEnvFile('development');
-
-  const json = JSON.stringify({ app_secret: ANDROID_APP_SECRET_KEY }, null, 2);
-
-  const plist = `<?xml version="1.0" encoding="UTF-8"?>
-  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
-  <plist version="1.0">
-    <dict>
-      <key>AppSecret</key>
-      <string>${IOS_APP_SECRET_KEY}</string>
-    </dict>
-  </plist>
-  `;
-
-  writeFileSync('android/app/src/main/assets/appcenter-config.json', json);
-  writeFileSync('ios/AppCenter-Config.plist', plist);
+  execScriptSync(commands.withENV('development', writeJSONFile));
+  execScriptSync(commands.withENV('development', writePlistFile));
   console.log('Setup CodePush... Done! ✨✨✨');
 };
 
@@ -28,6 +33,6 @@ const setupCodePush = () => {
     return;
   }
   execScriptSync(
-    'yarn && git init && git branch -m main && git add . && git commit -m "chore: initial commit 🚀"',
+    'cp ./environments/.env.development .env && yarn && git init && git branch -m main && git add . && git commit -m "chore: initial commit 🚀"',
   );
 })();

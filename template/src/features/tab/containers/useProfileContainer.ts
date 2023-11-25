@@ -1,4 +1,4 @@
-import { useAuthStore } from '@stores';
+import { useAuthStore } from '@/stores';
 import isEqual from 'react-fast-compare';
 
 const useProfileContainer = () => {

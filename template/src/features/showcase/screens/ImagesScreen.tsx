@@ -1,48 +1,37 @@
-import { Icon, Image, Spacer, Text } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { globalStyles } from '@themes';
-import { withHook } from '@utilities';
+import { More } from '@/assets/icons';
+import { Image, Text } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { View } from 'react-native';
 import { useImageContainer } from '../containers';
 
 const ImagesScreen = withHook(useImageContainer, ({ imageUrl }) => {
-  const styles = useStyle(createStyles);
+  const tw = useTailwind();
 
   return (
     <StackContainer
       title={ProtectedScreenName.Images}
       wrapperType="scrollView"
-      wrapperStyle={[globalStyles.flexCenter, styles.scrollView]}
+      wrapperStyle={tw`py-4 justify-center items-center gap-y-16`}
     >
-      <Text>Image</Text>
-      <Image source={imageUrl} style={styles.image} />
+      <View style={tw`flex-fill-center`}>
+        <Text>Image</Text>
+        <Image source={imageUrl} style={tw`w-[200px] h-[200px]`} />
+      </View>
 
-      <Spacer h={60} />
+      <View style={tw`flex-fill-center`}>
+        <Text>Cached Image</Text>
+        <Image cached source={imageUrl} style={tw`w-[200px] h-[200px]`} />
+      </View>
 
-      <Text>Cached Image</Text>
-      <Image cached source={imageUrl} style={styles.image} />
-
-      <Spacer h={60} />
-
-      <Text>Icon</Text>
-      <Icon source={imageUrl} size={24} />
-      <View />
+      <View style={tw`flex-fill-center`}>
+        <Text>Icon</Text>
+        <More stroke={'red'} />
+      </View>
     </StackContainer>
   );
 });
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    scrollView: {
-      paddingVertical: 16,
-    },
-    image: {
-      width: 200,
-      height: 200,
-    },
-  });
 
 export default ImagesScreen;

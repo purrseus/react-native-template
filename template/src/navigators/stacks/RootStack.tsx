@@ -1,27 +1,29 @@
-import { ProtectedScreenName, PublicScreenName } from '@core/enums';
-import { RootStackParamList } from '@core/types';
-import { LoginScreen, RegisterScreen } from '@features/authentication/screens';
+import { ProtectedScreenName, PublicScreenName } from '@/core/enums';
+import { RootStackParamList } from '@/core/types';
+import { LoginScreen, RegisterScreen } from '@/features/authentication/screens';
 import {
   BottomSheetsScreen,
   FormScreen,
   ImagesScreen,
-  LayoutsScreen,
   ListScreen,
   LoaderScreen,
   ModalsScreen,
   PickersScreen,
-  TouchableScreen,
   ShowcaseListScreen,
   SpacersScreen,
   TextsScreen,
-} from '@features/showcase/screens';
-import { useStyle } from '@hooks';
-import { stackScreenOptions } from '@navigators/options';
-import createStyles from '@navigators/styles';
-import BottomTabBar from '@navigators/tabs/BottomTabBar';
+  TouchableScreen,
+} from '@/features/showcase/screens';
+import { useTailwind } from '@/hooks';
+import { stackScreenOptions } from '@/navigators/options';
+import BottomTabBar from '@/navigators/tabs/BottomTabBar';
+import { useAuthStore } from '@/stores';
+import { useFlipper } from '@react-navigation/devtools';
+import { createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAuthStore } from '@stores';
-import isEqual from 'react-fast-compare';
+
+const useNavigationFlipper = __DEV__ ? useFlipper : null;
+export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -43,7 +45,6 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.Touchable} component={TouchableScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={FormScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={ImagesScreen} />
-    <NativeStack.Screen name={ProtectedScreenName.Layouts} component={LayoutsScreen} />
     <NativeStack.Screen name={ProtectedScreenName.List} component={ListScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={LoaderScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Modals} component={ModalsScreen} />
@@ -53,21 +54,19 @@ const ProtectedScreens = (
   </NativeStack.Group>
 );
 
-const RootNavigator = () => {
-  const styles = useStyle(createStyles);
+export default function RootNavigator() {
+  const tw = useTailwind();
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
-    isEqual,
   );
+  useNavigationFlipper?.(navigationRef);
 
   return (
     <NativeStack.Navigator
-      screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
+      screenOptions={{ ...stackScreenOptions, contentStyle: tw`background-color` }}
       initialRouteName={isAuthenticated ? PublicScreenName.Login : ProtectedScreenName.BottomTab}
     >
       {isAuthenticated ? ProtectedScreens : PublicScreens}
     </NativeStack.Navigator>
   );
-};
-
-export default RootNavigator;
+}

@@ -1,6 +1,6 @@
-import { PublicScreenName } from '@core/enums';
-import { PublicScreenProps } from '@core/types';
-import { useAuthStore } from '@stores';
+import { PublicScreenName } from '@/core/enums';
+import { PublicScreenProps } from '@/core/types';
+import { useAuthStore } from '@/stores';
 import isEqual from 'react-fast-compare';
 
 const useLoginContainer = ({ navigation }: PublicScreenProps<PublicScreenName.Login>) => {

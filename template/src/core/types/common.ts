@@ -1,4 +1,4 @@
-import { File } from '@core/interfaces';
+import { File } from '@/core/interfaces';
 import { ScaledSize } from 'react-native';
 
 type DateFormatTemplate = 'DD/MM/YYYY' | 'DD-MM-YYYY';

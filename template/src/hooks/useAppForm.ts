@@ -4,7 +4,7 @@ import { z, ZodRawShape } from 'zod';
 
 const useAppForm = <Z extends ZodRawShape>(
   schema: z.ZodObject<Z>,
-  formOptions?: UseFormProps<z.infer<typeof schema>>,
+  formOptions?: UseFormProps<z.infer<z.ZodObject<Z>>>,
 ) =>
   useForm({
     resolver: zodResolver(schema),

@@ -9,7 +9,7 @@
 [![License][license-badge]][license]
 [![Buy me a coffee][buymeacoffee-badge]][buymeacoffee]
 
-> Clean, efficient and scalable React Native template with pre-configured common set of packages to quick-start a new app.
+> Clean, efficient, and scalable React Native template with pre-configured common set of packages to quick-start a new app.
 
 ## :bookmark: Table Of Contents
 
@@ -26,9 +26,8 @@
 
 - Using [Typescript](https://www.typescriptlang.org)
 - Folder-by-feature structure
-- Lots of built-in components
-- Minimal additional dependencies
 - Dark mode support
+- A minimal UI kit built with [tailwindcss](https://github.com/jaredh159/tailwind-react-native-classnames)
 - Internationalization framework using [I18next](https://react.i18next.com/)
 - Lint commit messages using [Commitlint](https://github.com/conventional-changelog/commitlint)
 - Multiple environment configurations using [React Native Config](https://github.com/luggit/react-native-config)
@@ -64,7 +63,7 @@ yarn setup
 
 _If you don't use CodePush, you can skip this setup guide._
 
-1. Open up `scripts/utils.mjs`, replace `APP_CENTER_OWNER_NAME` value with your owner name, and replace `appCenterAppName` values with your app names.
+1. Open up `scripts/utils.mjs`, replace `appCenter.ownerName` value with your owner name, and replace `appCenter.appName` values with your app names.
 
 2. Add **App Secret Key** and **Code Push Deployment Key** into AppCenter variables in your `environments/.env.*` files.
 

@@ -4,6 +4,7 @@
 - [setup:code-push](#setupcode-push)
 - [android](#android)
 - [ios](#ios)
+- [firebase](#firebase)
 - [start](#start)
 - [xcode](#xcode)
 - [code-push](#code-push)
@@ -47,6 +48,14 @@ yarn ios
 ```
 
 Builds your app and starts it on iOS simulator.
+
+## firebase
+
+```sh
+yarn firebase
+```
+
+It will select the firebase config file that matches the environment you choose.
 
 ## start
 
@@ -125,6 +134,8 @@ It will run all of the test cases.
 These are the set of tasks which will run after every dependency installation. These tasks are:
 
 - It will run all of the patches defined in the patches directory. You can find the list of the patched dependencies [here](../template/patches).
+
+- Update react-native-permissions podspec to link additional permission handlers.
 
 - If you are running the project on MacOS, the it will automatically install the pods in the ios directory. If you are not on a MacOS machine, then it will skip the installing the pods.
 

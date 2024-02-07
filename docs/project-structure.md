@@ -12,6 +12,7 @@
 │   ├── production
 │   └── staging
 ├── ios
+├── patches
 ├── scripts
 └── src
     ├── assets
@@ -56,7 +57,7 @@
     │   │   ├── containers
     │   │   ├── screens
     │   │   ├── services
-    │   │   └── utilities
+    │   │   └── utils
     │   ├── showcase
     │   │   ├── components
     │   │   ├── containers
@@ -64,19 +65,17 @@
     │   │   ├── services
     │   │   │   ├── apis
     │   │   │   └── schemas
-    │   │   └── utilities
+    │   │   └── utils
     │   └── tab
     │       ├── components
     │       ├── containers
     │       ├── screens
     │       ├── services
-    │       └── utilities
+    │       └── utils
     ├── hooks
+    ├── i18n
+    │   └── locales
     ├── layouts
-    ├── libs
-    │   ├── i18n
-    │   │   └── locales
-    │   └── tailwind
     ├── navigators
     │   ├── stacks
     │   └── tabs
@@ -85,4 +84,4 @@
     └── utils
 ```
 
-For more detailed information, please refer to the [project's GitHub repository](https://github.com/thiendo261/react-native-template/tree/main/template).
+For more detailed information, please refer to the [project's GitHub repository](https://github.com/purrseus/react-native-template/tree/main/template).

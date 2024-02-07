@@ -117,26 +117,26 @@ This project is [MIT](./LICENSE) licensed.
 
 <!-- badge -->
 
-[lint]: https://github.com/thiendo261/react-native-template/actions/workflows/lint.yml
-[lint-badge]: https://github.com/thiendo261/react-native-template/actions/workflows/lint.yml/badge.svg
+[lint]: https://github.com/purrseus/react-native-template/actions/workflows/lint.yml
+[lint-badge]: https://github.com/purrseus/react-native-template/actions/workflows/lint.yml/badge.svg
 
-[publish]: https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml
-[publish-badge]: https://github.com/thiendo261/react-native-template/actions/workflows/npm-publish.yml/badge.svg
+[publish]: https://github.com/purrseus/react-native-template/actions/workflows/npm-publish.yml
+[publish-badge]: https://github.com/purrseus/react-native-template/actions/workflows/npm-publish.yml/badge.svg
 
 [npm]: https://www.npmjs.com/package/@purrseus/react-native-template
 [npm-badge]: https://img.shields.io/npm/v/@purrseus/react-native-template.svg?logo=npm
 
-[react-native-version]: https://github.com/thiendo261/react-native-template/blob/main/template/package.json
-[react-native-version-badge]: https://img.shields.io/github/package-json/dependency-version/thiendo261/react-native-template/react-native?filename=template%2Fpackage.json&logo=react
+[react-native-version]: https://github.com/purrseus/react-native-template/blob/main/template/package.json
+[react-native-version-badge]: https://img.shields.io/github/package-json/dependency-version/purrseus/react-native-template/react-native?filename=template%2Fpackage.json&logo=react
 
-[typescript-version]: https://github.com/thiendo261/react-native-template/blob/main/template/package.json
-[typescript-version-badge]: https://img.shields.io/github/package-json/dependency-version/thiendo261/react-native-template/dev/typescript?filename=template%2Fpackage.json&logo=typescript
+[typescript-version]: https://github.com/purrseus/react-native-template/blob/main/template/package.json
+[typescript-version-badge]: https://img.shields.io/github/package-json/dependency-version/purrseus/react-native-template/dev/typescript?filename=template%2Fpackage.json&logo=typescript
 
-[documentation]: https://github.com/thiendo261/react-native-template#readme
+[documentation]: https://github.com/purrseus/react-native-template#readme
 [documentation-badge]: https://img.shields.io/badge/documentation-yes-brightgreen.svg
 
-[license]: https://github.com/thiendo261/react-native-template/blob/HEAD/LICENSE
-[license-badge]: https://img.shields.io/github/license/thiendo261/react-native-template.svg
+[license]: https://github.com/purrseus/react-native-template/blob/HEAD/LICENSE
+[license-badge]: https://img.shields.io/github/license/purrseus/react-native-template.svg
 
 [buymeacoffee]: https://www.buymeacoffee.com/thiendo261
 [buymeacoffee-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-thiendo261-orange?logo=buymeacoffee

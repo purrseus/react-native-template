@@ -1,9 +1,9 @@
-import { Button, Field, Form, KeyboardAwareScrollView } from '@/components/core';
+import { Button, Field, Form } from '@/components/core';
 import { StackContainer } from '@/components/shared';
 import { ProtectedScreenName } from '@/core/enums';
 import { useTailwind } from '@/hooks';
 import { withHook } from '@/utils';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useFormContainer } from '../containers';
 
 const FormScreen = withHook(
@@ -14,7 +14,7 @@ const FormScreen = withHook(
 
     return (
       <StackContainer title={ProtectedScreenName.Form}>
-        <KeyboardAwareScrollView style={tw`px-4`} contentContainerStyle={tw`gap-y-8`}>
+        <ScrollView style={tw`px-4`} contentContainerStyle={tw`gap-y-8`}>
           <View>
             <Form form={form}>
               <Field.TextInput
@@ -60,7 +60,7 @@ const FormScreen = withHook(
           </View>
 
           <Button title="Submit" onPress={onSubmit} />
-        </KeyboardAwareScrollView>
+        </ScrollView>
       </StackContainer>
     );
   },

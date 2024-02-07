@@ -1,6 +1,6 @@
 /* eslint-disable react-native/split-platform-components */
 import Alert from '@/components/core/modal/Alert';
-import i18n from '@/libs/i18n';
+import i18n from '@/i18n';
 import { Platform, PlatformAndroidStatic } from 'react-native';
 import {
   check,

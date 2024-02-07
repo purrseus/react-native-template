@@ -1,5 +1,5 @@
-import { default as tailwind } from '@/libs/tailwind';
 import { useCommonStore } from '@/stores';
+import { tailwind } from '@/utils';
 import { useDeviceContext } from 'twrnc';
 
 export default function useTailwind() {

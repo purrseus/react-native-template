@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FlashList, FlashListProps } from '@shopify/flash-list';
 import { ForwardedRef, forwardRef, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
@@ -14,6 +13,7 @@ export type ListProps<T, F> = Omit<FactoryListProps<T, F>, keyof RefreshControlP
     flashed?: F;
   };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function List<T = any, F = false>(
   {
     flashed,

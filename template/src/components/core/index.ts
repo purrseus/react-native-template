@@ -6,7 +6,6 @@ export { default as MultilineTextInput } from './input/multiline/MultilineTextIn
 export { default as IconTextInput } from './input/singleline/IconTextInput';
 export { default as TextInput } from './input/singleline/TextInput';
 export { default as InfiniteList } from './list/InfiniteList';
-export { default as KeyboardAwareScrollView } from './list/KeyboardAwareScrollView';
 export { default as List } from './list/List';
 export { default as ActivityIndicator } from './loader/ActivityIndicator';
 export { default as OverlayLoading } from './loader/OverlayLoading';

@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thiendo261/react-native-template.git"
+    "url": "git+https://github.com/purrseus/react-native-template.git"
   },
   "keywords": [
     "react-native",
@@ -18,7 +18,7 @@
   "author": "Thiện Đỗ <thiendo3831@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thiendo261/react-native-template/issues"
+    "url": "https://github.com/purrseus/react-native-template/issues"
   },
-  "homepage": "https://github.com/thiendo261/react-native-template#readme"
+  "homepage": "https://github.com/purrseus/react-native-template#readme"
 }

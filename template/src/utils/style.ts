@@ -1,4 +1,8 @@
+import config from '@/../tailwind.config';
 import { CommonSize } from '@/core/types';
+import { create } from 'twrnc';
+
+export const tailwind = create(config);
 
 export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 

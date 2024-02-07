@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CheckboxItem } from '@/core/interfaces';
 import { FieldProps } from '@/core/types';
 import { useTailwind } from '@/hooks';
@@ -14,6 +13,7 @@ export interface CheckboxesProps<T> extends Omit<ViewProps, 'style'> {
   itemStyle?: Style;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Checkboxes<T = any>({
   name,
   label,

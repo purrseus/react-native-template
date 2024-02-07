@@ -4,7 +4,7 @@ type NestedRequired<T> = {
   [P in keyof T]-?: T[P] extends string | undefined ? string : NestedRequired<T[P]>;
 };
 
-const config = {
+const nativeConfig = {
   env: Config.ENV,
   appName: Config.APP_NAME,
   apiUrl: Config.API_URL,
@@ -34,4 +34,5 @@ const config = {
   },
 };
 
-export default config as NestedRequired<typeof config>;
+const config = nativeConfig as NestedRequired<typeof nativeConfig>;
+export default config;

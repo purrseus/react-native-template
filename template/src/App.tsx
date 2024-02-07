@@ -1,14 +1,12 @@
-import RootNavigator, { navigationRef } from '@/navigators';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { NavigationContainer } from '@react-navigation/native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { StatusBar } from 'react-native';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { OverlayLoading } from './components/core';
-import { buildProvidersTree, overlayLoadingRef } from './utils';
-
-const queryClient = new QueryClient();
+import { StatusBar } from './layouts';
+import { RootNavigator } from './navigators';
+import { buildProvidersTree, navigationRef, overlayLoadingRef, queryClient } from './utils';
 
 const AppProvider = buildProvidersTree([
   [QueryClientProvider, { client: queryClient }],

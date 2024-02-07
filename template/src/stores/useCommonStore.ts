@@ -1,6 +1,12 @@
 import { Language } from '@/core/types';
-import i18n from '@/libs/i18n';
-import { createPersistenceStore } from '@/utils/store';
+import i18n from '@/i18n';
+import {
+  changeKeyboardAppearance,
+  createPersistenceStore,
+  getCurrentLanguage,
+  tailwind,
+} from '@/utils';
+import { Appearance } from 'react-native';
 
 type Theme = 'auto' | 'light' | 'dark';
 
@@ -14,24 +20,37 @@ type CommonActions = {
   changeTheme: (theme: Theme) => void;
 };
 
+const additionalActions: CommonActions = {
+  changeLanguage: language => {
+    i18n.changeLanguage(language);
+  },
+  changeTheme: theme => {
+    const colorScheme = theme === 'auto' ? Appearance.getColorScheme() ?? 'light' : theme;
+    tailwind.setColorScheme(colorScheme);
+    if (isIos()) changeKeyboardAppearance(colorScheme);
+  },
+};
+
 const useCommonStore = createPersistenceStore<CommonState & CommonActions>(
   'common',
   set => ({
     theme: 'auto',
-    language: 'en-US',
+    language: getCurrentLanguage(),
     changeLanguage: language =>
       set(state => {
         state.language = language;
-        i18n.changeLanguage(language);
+        additionalActions.changeLanguage(language);
       }),
     changeTheme: theme =>
       set(state => {
         state.theme = theme;
+        additionalActions.changeTheme(theme);
       }),
   }),
   {
     onRehydrateStorage: () => innerState => {
-      if (innerState?.language) i18n.changeLanguage(innerState.language);
+      if (innerState?.language) additionalActions.changeLanguage(innerState.language);
+      if (innerState?.theme) additionalActions.changeTheme(innerState.theme);
     },
   },
 );

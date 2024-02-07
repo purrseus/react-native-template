@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTailwind, useThrottle } from '@/hooks';
 import {
   GetNextPageParamFunction,
@@ -19,6 +18,7 @@ type InfiniteListProps<T, F> = Omit<ListProps<T, F>, 'data'> & {
   ListErrorComponent?: ListProps<T, true>['ListEmptyComponent'];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function InfiniteList<T = any, F = false>(
   {
     queryKey,

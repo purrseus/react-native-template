@@ -1,5 +1,5 @@
-import enUS from '@/libs/i18n/locales/en-US.json';
-import viVN from '@/libs/i18n/locales/vi-VN.json';
+import enUS from '@/i18n/locales/en-US.json';
+import viVN from '@/i18n/locales/vi-VN.json';
 import 'i18next';
 import { DEFAULT_NAMESPACE } from '../constants';
 

@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
 /**
- * @type {import('tailwindcss').Config}
+ * @type {import('twrnc').TwConfig}
  */
 module.exports = {
   theme: {

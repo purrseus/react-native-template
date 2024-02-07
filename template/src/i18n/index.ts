@@ -1,5 +1,3 @@
-import enUS from './locales/en-US.json';
-import viVN from './locales/vi-VN.json';
 import { DEFAULT_NAMESPACE, LANGUAGE_MAP } from '@/core/constants';
 import { Language, LanguageMap } from '@/core/types';
 import { getCurrentLanguage } from '@/utils/common';
@@ -11,6 +9,8 @@ import numeral from 'numeral';
 import 'numeral/locales/en-gb';
 import 'numeral/locales/vi';
 import { initReactI18next } from 'react-i18next';
+import enUS from './locales/en-US.json';
+import viVN from './locales/vi-VN.json';
 
 const CURRENT_LANGUAGE = getCurrentLanguage();
 const FALLBACK_LANGUAGE: Language = 'en-US';

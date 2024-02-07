@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonSize } from '@/core/types';
 
 export interface Measure extends CommonSize {
@@ -10,5 +9,6 @@ export interface Measure extends CommonSize {
 
 export interface PromiseObject<T> {
   resolve: (value: T | PromiseLike<T>) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reject: (reason?: any) => void;
 }

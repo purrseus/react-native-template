@@ -3,9 +3,7 @@ import {
   ActionSheetProps,
   useActionSheet,
 } from '@expo/react-native-action-sheet';
-import { useCommonStore } from '@/stores';
 import { useCallback } from 'react';
-import { useColorScheme } from 'react-native';
 import useTailwind from './useTailwind';
 
 type UseActionSheet = (
@@ -15,8 +13,6 @@ type UseActionSheet = (
 const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
   const tw = useTailwind();
   const { showActionSheetWithOptions } = useActionSheet();
-  const theme = useCommonStore(state => state.theme);
-  const colorScheme = useColorScheme();
 
   const showActionSheet = useCallback(() => {
     const keepOriginalValue = !Number.isInteger(actionSheetOptions.cancelButtonIndex) || isIos();
@@ -32,7 +28,7 @@ const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
     const additionalOptions: ActionSheetOptions = {
       options,
       cancelButtonIndex,
-      userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
+      userInterfaceStyle: tw.prefixMatch('dark') ? 'dark' : 'light',
       containerStyle: tw`bg-white dark:bg-zinc-900 rounded-t-2xl`,
       titleTextStyle: tw.style(
         'text-sm bg-zinc-400/80',
@@ -50,7 +46,7 @@ const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
     return showActionSheetWithOptions({ ...actionSheetOptions, ...additionalOptions }, index =>
       callback(keepOriginalValue ? index : index === options.lastIndex ? 0 : (index ?? -1) + 1),
     );
-  }, [actionSheetOptions, theme, colorScheme, tw, showActionSheetWithOptions, callback]);
+  }, [actionSheetOptions, tw, showActionSheetWithOptions, callback]);
 
   return showActionSheet;
 };

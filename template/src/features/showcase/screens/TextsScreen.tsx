@@ -1,7 +1,6 @@
 import { Home } from '@/assets/icons';
 import {
   IconTextInput,
-  KeyboardAwareScrollView,
   MultilineTextInput,
   ReadMoreText,
   Text,
@@ -11,6 +10,7 @@ import { StackContainer } from '@/components/shared';
 import { ProtectedScreenName } from '@/core/enums';
 import { useTailwind } from '@/hooks';
 import { useTranslation } from 'react-i18next';
+import { ScrollView } from 'react-native';
 import { Separator } from '../components';
 
 export default function TextsScreen() {
@@ -19,7 +19,7 @@ export default function TextsScreen() {
 
   return (
     <StackContainer title={ProtectedScreenName.Texts}>
-      <KeyboardAwareScrollView style={tw`px-4`}>
+      <ScrollView style={tw`px-4`}>
         <Text>Normal text</Text>
 
         <Separator />
@@ -77,10 +77,10 @@ export default function TextsScreen() {
         <Text>MultilineTextInput dynamicHeight</Text>
         <MultilineTextInput
           dynamicHeight
-          placeholder="MultilineTextInput"
+          placeholder="MultilineTextInput dynamicHeight"
           containerStyle={tw`w-[100%]`}
         />
-      </KeyboardAwareScrollView>
+      </ScrollView>
     </StackContainer>
   );
 }

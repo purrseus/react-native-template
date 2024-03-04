@@ -1,6 +1,6 @@
 import { File, PromiseObject } from '@/core/interfaces';
 import { PickedImageType } from '@/core/types';
-import { checkCameraPermission, checkPhotoGalleryPermissions } from '@/utils';
+import { PermissionService } from '@/utils';
 import { useCallback, useMemo, useRef } from 'react';
 import {
   CameraOptions,
@@ -19,8 +19,8 @@ interface Options {
 }
 
 enum PickerOptions {
-  CAMERA,
-  IMAGE_LIBRARY,
+  CAMERA = 1,
+  IMAGE_LIBRARY = 2,
 }
 
 const selectOptions = {
@@ -38,10 +38,10 @@ const defaultOptions: CameraOptions & ImageLibraryOptions = {
 
 const checkImagePickerPermission = async (): Promise<boolean> => {
   try {
-    const hasCameraPermission = await checkCameraPermission();
+    const hasCameraPermission = await PermissionService.checkCamera();
     if (!hasCameraPermission) return false;
 
-    const hasGalleryPermission = await checkPhotoGalleryPermissions();
+    const hasGalleryPermission = await PermissionService.checkPhotoGallery();
     if (!hasGalleryPermission) return false;
 
     return true;

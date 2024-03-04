@@ -1,3 +1,9 @@
 import { QueryClient } from '@tanstack/react-query';
 
-export const queryClient = new QueryClient();
+class AppQueryClient extends QueryClient {
+  queryKeys = {
+    photos: 'photos',
+  };
+}
+
+export const queryClient = new AppQueryClient();

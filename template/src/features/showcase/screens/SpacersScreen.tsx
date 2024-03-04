@@ -9,18 +9,16 @@ import useSpacerContainer from '../containers/useSpacerContainer';
 
 const SpacersScreen = withHook(
   useSpacerContainer,
-  ({ showBottomTabSpacer, showSafeAreaSpacer, showHalfSafeAreaSpacer, status }) => {
+  ({ showSafeAreaSpacer, showHalfSafeAreaSpacer, status }) => {
     const tw = useTailwind();
 
     return (
       <StackContainer title={ProtectedScreenName.Spacers}>
         <View style={tw`flex-fill-center bg-zinc-400 gap-y-8`}>
-          <ShowcaseItem title="Show bottomTab spacer" onPress={showBottomTabSpacer} />
           <ShowcaseItem title="Show safeArea spacer" onPress={showSafeAreaSpacer} />
           <ShowcaseItem title="Show halfSafeArea spacer" onPress={showHalfSafeAreaSpacer} />
         </View>
 
-        {status === 'bottomTab' && <BottomSpacer type="bottomTab" />}
         {status === 'safeArea' && <BottomSpacer type="safeArea" />}
         {status === 'halfSafeArea' && <BottomSpacer type="halfSafeArea" />}
       </StackContainer>

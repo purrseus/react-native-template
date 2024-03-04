@@ -2,7 +2,7 @@
   InfoPlist.strings
   ReactNativeLab
 
-  Created by Thien Do on 22/05/2022.
+  Created by Thien Do on 16/02/2024.
   
 */
 NSLocationWhenInUseUsageDescription = "NSLocationWhenInUseUsageDescription English";

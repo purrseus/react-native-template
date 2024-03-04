@@ -79,13 +79,14 @@ export const commands = {
     return `${this.generateFirebaseConfigFile(env)} && ${command}`;
   },
   runAndroid(buildVariant, suffixAppId) {
-    return `yarn react-native run-android --mode ${buildVariant} --appId com.${appInfo.name.toLowerCase()}${suffixAppId}`;
+    // FIXME: Code push workaround, see: https://github.com/microsoft/react-native-code-push/issues/2442
+    return `rm -r ./android/app/build/generated/assets/createBundle* && yarn react-native run-android --mode ${buildVariant} --appId com.${appInfo.name.toLowerCase()}${suffixAppId}`;
   },
   generateAndroidFile(buildVariant) {
     return `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`;
   },
   runIos(env, buildType, envShort) {
-    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${appInfo.name} (${envShort})'`;
+    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${appInfo.name} (${envShort})' --simulator 'iPhone 15 Pro Max'`;
   },
   openXCode() {
     return 'xed -b ios';

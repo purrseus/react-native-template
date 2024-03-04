@@ -5,57 +5,36 @@ import {
   createNavigationContainerRef,
 } from '@react-navigation/native';
 
-export const navigationRef = createNavigationContainerRef<RootStackParamList>();
+export namespace NavigationService {
+  type NavigationHelperFns = NavigationHelpers<RootStackParamList>;
+  type HelperFn<Name extends keyof NavigationHelperFns> = NavigationHelperFns[Name];
+  type ActionName = keyof typeof StackActions;
+  type ActionFn<T extends ActionName> = (...args: Parameters<(typeof StackActions)[T]>) => void;
 
-type ActionName = keyof typeof StackActions;
-type ActionType<T extends ActionName> = (...args: Parameters<(typeof StackActions)[T]>) => void;
+  export const ref = createNavigationContainerRef<RootStackParamList>();
 
-interface Navigation<T extends RootStackParamList>
-  extends Pick<NavigationHelpers<T>, 'goBack' | 'reset' | 'dispatch'> {
-  ready(callback: () => void): void;
+  const ready = (callback: () => void) => {
+    if (ref.isReady()) callback();
+  };
 
-  navigate<RouteName extends keyof T>(
-    ...args: RouteName extends unknown
-      ? undefined extends T[RouteName]
-        ? [screen: RouteName] | [screen: RouteName, params: T[RouteName]]
-        : [screen: RouteName, params: T[RouteName]]
-      : never
-  ): void;
+  const dispatch: HelperFn<'dispatch'> = action => ready(() => ref.dispatch(action));
 
-  replace: ActionType<'replace'>;
-  push: ActionType<'push'>;
-  pop: ActionType<'pop'>;
-  popToTop: ActionType<'popToTop'>;
-}
+  export const navigate = <RouteName extends keyof RootStackParamList>(
+    ...args: Parameters<typeof ref.navigate<RouteName>>
+  ) => ready(() => ref.navigate<RouteName>(...args));
 
-export const rootNavigation: Navigation<RootStackParamList> = {
-  ready(callback) {
-    if (navigationRef.isReady()) callback();
-  },
-  dispatch(action) {
-    this.ready(() => navigationRef.dispatch(action));
-  },
-  navigate(...args) {
-    this.ready(() => navigationRef.navigate(...args));
-  },
-  goBack() {
-    this.ready(() => {
-      if (navigationRef.canGoBack()) navigationRef.goBack();
+  export const goBack: HelperFn<'goBack'> = () =>
+    ready(() => {
+      if (ref.canGoBack()) ref.goBack();
     });
-  },
-  reset(...params) {
-    this.ready(() => navigationRef.reset(...params));
-  },
-  replace(name, params) {
-    this.dispatch(StackActions.replace(name, params));
-  },
-  push(name, params) {
-    this.dispatch(StackActions.push(name, params));
-  },
-  pop(count) {
-    this.dispatch(StackActions.pop(count));
-  },
-  popToTop() {
-    this.dispatch(StackActions.popToTop());
-  },
-};
+
+  export const reset: HelperFn<'reset'> = (...params) => ready(() => ref.reset(...params));
+
+  export const replace: ActionFn<'replace'> = (...args) => dispatch(StackActions.replace(...args));
+
+  export const push: ActionFn<'push'> = (...args) => dispatch(StackActions.push(...args));
+
+  export const pop: ActionFn<'pop'> = (...args) => dispatch(StackActions.pop(...args));
+
+  export const popToTop: ActionFn<'popToTop'> = () => dispatch(StackActions.popToTop());
+}

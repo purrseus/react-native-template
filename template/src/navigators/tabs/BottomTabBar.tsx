@@ -10,12 +10,12 @@ import { useNetwork, useTailwind } from '@/hooks';
 import { tabScreenOptions } from '@/navigators/options';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigationConfig } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
-import CustomizedTabBar from './CustomizedTabBar';
+import CustomizedBottomTabBar from './CustomizedBottomTabBar';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
-  <CustomizedTabBar {...props} />
+  <CustomizedBottomTabBar {...props} />
 );
 
 export default function BottomTabBar() {

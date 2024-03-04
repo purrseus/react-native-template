@@ -22,7 +22,7 @@ PODS:
   - BVLinearGradient (2.7.3):
     - React-Core
   - CocoaAsyncSocket (7.6.5)
-  - CodePush (8.0.2):
+  - CodePush (8.2.1):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.12)
     - React-Core
@@ -559,7 +559,7 @@ PODS:
     - React-Core
   - RNLocalize (3.0.2):
     - React-Core
-  - RNPermissions (3.8.4):
+  - RNPermissions (4.1.1):
     - React-Core
   - RNReanimated (3.3.0):
     - DoubleConversion
@@ -857,7 +857,7 @@ SPEC CHECKSUMS:
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   BVLinearGradient: fbe308a1d19a8133f69e033abc85d8008644f5e3
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CodePush: 9eddecce05cd10491e2673b259c85885a462be33
+  CodePush: 84c9a5792cb3c8e311197d595610c803f0b01739
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 71803c074f6325f10b5ec891c443b6bbabef0ca7
   FBReactNativeSpec: 448e08a759d29a96e15725ae532445bf4343567c
@@ -924,7 +924,7 @@ SPEC CHECKSUMS:
   RNFlashList: 25b0e092b4470c84db0386d4f5316dc34123bb6d
   RNGestureHandler: dec4645026e7401a0899f2846d864403478ff6a5
   RNLocalize: dbea38dcb344bf80ff18a1757b1becf11f70cae4
-  RNPermissions: 368977ee141b24982449b1f8963c0cf8c26d4024
+  RNPermissions: 04be27ae149083f4c25214780fc0d2292d18d084
   RNReanimated: 9f7068e43b9358a46a688d94a5a3adb258139457
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
@@ -935,6 +935,6 @@ SPEC CHECKSUMS:
   Yoga: 86fed2e4d425ee4c6eab3813ba1791101ee153c6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ec5ea749c76830e30f2b8b6cb647fb1a3d2bf1cf
+PODFILE CHECKSUM: cca45e2f08561fa25c97d6f768b475c88c8563df
 
 COCOAPODS: 1.12.1

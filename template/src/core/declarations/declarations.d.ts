@@ -5,7 +5,8 @@ declare global {
    * Prints a string representation of the object to the console.
    * @param args everything you want to display on the console.
    */
-  declare function print(...args: any[]): void;
+  function print(...args: any[]): void;
+
   /**
    * Return true if and only if the current OS is Android.
    */
@@ -38,11 +39,9 @@ declare global {
    */
   function wait(timeout?: number): Promise<void>;
 
-  /**
-   * Create an ascending order array.
-   * @param length The length of the array.
-   */
-  function createAscendingOrderArray(length: number): number[];
+  // -------------------------------------------------------------------------------------------
+
+  type FirstParameter<T> = Parameters<T>[0];
 
   // -------------------------------------------------------------------------------------------
 

@@ -10,7 +10,13 @@ import { useTouchableContainer } from '../containers';
 
 const TouchableScreen = withHook(
   useTouchableContainer,
-  ({ isSwitchEnabled, onSwitchPress, onButtonPress }) => {
+  ({
+    isSwitchEnabled,
+    onSwitchPress,
+    onLargeButtonPress,
+    onMediumButtonPress,
+    onSmallButtonPress,
+  }) => {
     const tw = useTailwind();
 
     return (
@@ -23,11 +29,11 @@ const TouchableScreen = withHook(
         <Separator />
 
         {/* Size */}
-        <Button title="Large size (default)" size="large" onPress={onButtonPress} />
+        <Button title="Large size (default)" size="large" onPress={onLargeButtonPress} />
         <Separator />
-        <Button title="Medium size" size="medium" />
+        <Button title="Medium size" size="medium" onPress={onMediumButtonPress} />
         <Separator />
-        <Button title="Small size" size="small" />
+        <Button title="Small size" size="small" onPress={onSmallButtonPress} />
         <Separator />
 
         <View style={tw`flex-row gap-x-4`}>

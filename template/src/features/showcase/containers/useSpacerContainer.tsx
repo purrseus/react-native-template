@@ -1,9 +1,7 @@
 import { useState } from 'react';
 
 const useSpacerContainer = () => {
-  const [status, setStatus] = useState<'bottomTab' | 'safeArea' | 'halfSafeArea' | null>(null);
-
-  const showBottomTabSpacer = () => setStatus('bottomTab');
+  const [status, setStatus] = useState<'safeArea' | 'halfSafeArea' | null>(null);
 
   const showSafeAreaSpacer = () => setStatus('safeArea');
 
@@ -11,7 +9,6 @@ const useSpacerContainer = () => {
 
   return {
     status,
-    showBottomTabSpacer,
     showSafeAreaSpacer,
     showHalfSafeAreaSpacer,
   };

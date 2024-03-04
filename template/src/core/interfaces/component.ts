@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import { SvgProps } from 'react-native-svg';
 
 export interface AppBarAction {
@@ -12,10 +12,6 @@ export interface CheckboxItem<T = any> {
   label: string;
   value: T;
   disabled?: boolean;
-}
-
-export interface OverlayLoadingMethods {
-  show: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DateTimePickerMethods {

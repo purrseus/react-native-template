@@ -7,7 +7,6 @@ export const ONE_SECOND = 1000;
 export const HORIZONTAL_SAFETY_EDGES: ReadonlyArray<Edge> = ['left', 'right'];
 
 //#region sizes
-export const TAB_BAR_HEIGHT = 70;
 export const APP_BAR_HEIGHT = 50;
 export const DEFAULT_FONT_SIZE = 14;
 export const MIN_HEIGHT_INPUT = DEFAULT_FONT_SIZE + 6;

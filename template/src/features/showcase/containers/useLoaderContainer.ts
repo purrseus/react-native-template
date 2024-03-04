@@ -1,10 +1,10 @@
-import { overlayLoading } from '@/utils';
+import { OverlayLoading } from '@/components/core';
 
 const useLoaderContainer = () => {
   const handleOverlayLoading = async () => {
-    overlayLoading.show();
+    OverlayLoading.show();
     await wait(duration({ s: 3 }));
-    overlayLoading.hide();
+    OverlayLoading.hide();
   };
 
   return { handleOverlayLoading };

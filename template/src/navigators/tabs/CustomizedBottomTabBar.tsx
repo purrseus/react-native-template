@@ -1,6 +1,6 @@
 import * as Icons from '@/assets/icons';
 import { BottomSpacer, Text, Touchable } from '@/components/core';
-import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@/core/constants';
+import { HORIZONTAL_SAFETY_EDGES } from '@/core/constants';
 import { TabScreenName } from '@/core/enums';
 import { useAppTranslation, useKeyboard, useTailwind } from '@/hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
@@ -19,7 +19,11 @@ interface TabUI {
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
-export default function CustomizedTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+export default function CustomizedBottomTabBar({
+  state,
+  descriptors,
+  navigation,
+}: BottomTabBarProps) {
   const tw = useTailwind();
   const { t } = useAppTranslation('tab');
   const { keyboardShown } = useKeyboard();
@@ -66,13 +70,13 @@ export default function CustomizedTabBar({ state, descriptors, navigation }: Bot
       edges={HORIZONTAL_SAFETY_EDGES}
       style={[
         tw.style(
-          'abs-fill bg-white dark:bg-zinc-900 rounded-t-3xl shadow-black dark:shadow-zinc-200 shadow-opacity-10 shadow-radius-2 elevation-20',
+          'bg-white dark:bg-zinc-900 shadow-black dark:shadow-zinc-200 shadow-opacity-10 shadow-radius-2 elevation-20',
           { top: undefined },
         ),
         tabBarAnimatedStyle,
       ]}
     >
-      <View style={tw`flex-row h-[${TAB_BAR_HEIGHT}px] rounded-t-3xl`}>
+      <View style={tw`flex-row h-[70px]`}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const screenName = route.name as TabScreenName;

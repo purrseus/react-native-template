@@ -22,7 +22,7 @@ export default function Image<C extends boolean>({
   const imageStyle = tw.style(hasSizes ? 'bg-transparent' : 'bg-zinc-300 dark:bg-zinc-700', style);
 
   const handleOnLoad = useCallback(
-    ({ nativeEvent }: Parameters<NonNullable<typeof onLoad>>[0]) => {
+    ({ nativeEvent }: FirstParameter<NonNullable<typeof onLoad>>) => {
       // @ts-ignore
       onLoad?.({ nativeEvent });
 

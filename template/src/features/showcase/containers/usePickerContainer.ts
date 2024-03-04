@@ -1,7 +1,7 @@
-import { Alert } from '@/components/core';
 import { DateTimePickerMethods } from '@/core/interfaces';
 import { useImagePicker } from '@/hooks';
 import { useEffect, useRef, useState } from 'react';
+import { Alert } from 'react-native';
 
 const usePickerContainer = () => {
   const [dateTime, setDateTime] = useState<Date | null>(null);
@@ -10,13 +10,13 @@ const usePickerContainer = () => {
 
   useEffect(() => {
     if (images.isNotEmpty)
-      Alert(
+      Alert.alert(
         formatReferenceType(typeof images.first !== 'string' ? images.first.uri : images.first),
       );
   }, [images]);
 
   useEffect(() => {
-    if (dateTime) Alert(dateTime.toString());
+    if (dateTime) Alert.alert(dateTime.toString());
   }, [dateTime]);
 
   const showImagePicker = pickImage;

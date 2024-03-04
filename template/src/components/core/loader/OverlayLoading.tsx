@@ -1,23 +1,31 @@
-import { OverlayLoadingMethods } from '@/core/interfaces';
 import { useTailwind } from '@/hooks';
-import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
+import { Dispatch, SetStateAction, createRef, useImperativeHandle, useState } from 'react';
 import { View } from 'react-native';
 import Modal from '../modal/Modal';
 import ActivityIndicator from './ActivityIndicator';
 
-function OverlayLoading(_: unknown, ref: ForwardedRef<OverlayLoadingMethods>) {
-  const tw = useTailwind();
-  const [isVisible, setIsVisible] = useState(false);
+export namespace OverlayLoading {
+  interface OverlayLoadingMethods {
+    show: Dispatch<SetStateAction<boolean>>;
+  }
 
-  useImperativeHandle(ref, () => ({ show: setIsVisible }), []);
+  const overlayLoadingRef = createRef<OverlayLoadingMethods>();
 
-  return (
-    <Modal isVisible={isVisible}>
-      <View style={tw`self-center p-5 rounded-xl bg-black/60`}>
-        <ActivityIndicator size="large" />
-      </View>
-    </Modal>
-  );
+  export const show = (): void => overlayLoadingRef.current?.show(true);
+  export const hide = (): void => overlayLoadingRef.current?.show(false);
+
+  export function Component() {
+    const tw = useTailwind();
+    const [isVisible, setIsVisible] = useState(false);
+
+    useImperativeHandle(overlayLoadingRef, () => ({ show: setIsVisible }), []);
+
+    return (
+      <Modal isVisible={isVisible}>
+        <View style={tw`self-center p-5 rounded-xl bg-black/60`}>
+          <ActivityIndicator size="large" />
+        </View>
+      </Modal>
+    );
+  }
 }
-
-export default forwardRef(OverlayLoading);

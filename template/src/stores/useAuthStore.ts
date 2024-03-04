@@ -1,4 +1,4 @@
-import { createPersistenceStore } from '@/utils';
+import { Store } from '@/utils';
 
 type AuthState = {
   accessToken: string | null;
@@ -10,7 +10,7 @@ type AuthActions = {
   clearTokens: () => void;
 };
 
-const useAuthStore = createPersistenceStore<AuthState & AuthActions>('auth', set => ({
+const useAuthStore = Store.createPersistenceStore<AuthState & AuthActions>('auth', set => ({
   accessToken: null,
   refreshToken: null,
   setTokens: ({ accessToken, refreshToken }) =>

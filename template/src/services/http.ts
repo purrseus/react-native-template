@@ -1,5 +1,3 @@
-import { Alert } from '@/components/core';
-import nativeConfig from '@/core/configs';
 import { PromiseObject } from '@/core/interfaces';
 import { useAuthStore } from '@/stores';
 import axios, {
@@ -10,6 +8,8 @@ import axios, {
   HttpStatusCode,
   InternalAxiosRequestConfig,
 } from 'axios';
+import { Alert } from 'react-native';
+import Config from 'react-native-config';
 import { ZodError, ZodTypeAny, z } from 'zod';
 
 type OriginalRequest = (NonNullable<InternalAxiosRequestConfig> & { retry?: boolean }) | undefined;
@@ -31,6 +31,11 @@ export default class Http extends Axios {
     this.useResponseInterceptor();
   }
 
+  private setAuthorizationHeader(token?: string | null): void {
+    if (token) this.defaults.headers.common.Authorization = this.createBearerToken(token);
+    else delete this.defaults.headers.common.Authorization;
+  }
+
   private useRequestInterceptor(): void {
     this.interceptors.request.use(
       config => config,
@@ -49,6 +54,7 @@ export default class Http extends Axios {
 
         const shouldHandleToken =
           isUnauthorized && !!originalRequest?.headers?.Authorization && !originalRequest?.retry;
+
         const refreshTokenFailed = config?.url === this.refreshTokenUrl;
 
         if (refreshTokenFailed || !shouldHandleToken) return Promise.reject(responseError);
@@ -111,11 +117,6 @@ export default class Http extends Axios {
     originalRequest.headers.Authorization = this.createBearerToken(accessToken);
   }
 
-  private setAuthorizationHeader(token?: string | null): void {
-    if (token) this.defaults.headers.common.Authorization = this.createBearerToken(token);
-    else delete this.defaults.headers.common.Authorization;
-  }
-
   private handlePromiseQueue(param: { accessToken: string } | { error: unknown }): void {
     if (this.promiseQueue.isEmpty) return;
 
@@ -127,7 +128,7 @@ export default class Http extends Axios {
     this.promiseQueue.length = 0;
   }
 
-  public responseDataAdapter<
+  responseDataAdapter<
     Z extends ZodTypeAny,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     T extends (...args: any[]) => Promise<AxiosResponse>,
@@ -140,7 +141,7 @@ export default class Http extends Axios {
 
       const title = `${response.config.method} ${response.config.url}`;
       const message = JSON.stringify(result.error.format());
-      if (nativeConfig.env === 'development' && !__DEV__) Alert(title, message);
+      if (Config.ENV === 'development' && !__DEV__) Alert.alert(title, message);
       throw new ZodError(result.error.issues);
     };
   }

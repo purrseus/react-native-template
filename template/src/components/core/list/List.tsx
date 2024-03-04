@@ -2,27 +2,18 @@ import { FlashList, FlashListProps } from '@shopify/flash-list';
 import { ForwardedRef, forwardRef, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
 import RefreshControl from '../loader/RefreshControl';
-import BottomSpacer from '../spacer/BottomSpacer';
 
 type FactoryListProps<T, F> = F extends true ? FlashListProps<T> : FlatListProps<T>;
 export type FactoryListRef<T, F> = F extends true ? FlashList<T> : FlatList<T>;
 
 export type ListProps<T, F> = Omit<FactoryListProps<T, F>, keyof RefreshControlProps> &
   Partial<RefreshControlProps> & {
-    inTabScreen?: boolean;
     flashed?: F;
   };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function List<T = any, F = false>(
-  {
-    flashed,
-    refreshing = false,
-    onRefresh,
-    ListFooterComponent,
-    inTabScreen = false,
-    ...props
-  }: ListProps<T, F>,
+  { flashed, refreshing = false, onRefresh, ...props }: ListProps<T, F>,
   ref: ForwardedRef<FactoryListRef<T, F>>,
 ) {
   const Component = flashed ? FlashList : FlatList;
@@ -73,12 +64,6 @@ function List<T = any, F = false>(
         refreshControl: <RefreshControl {...{ refreshing, onRefresh }} />,
       })}
       ref={ref as ForwardedRef<FactoryListRef<T, true>>}
-      ListFooterComponent={
-        <>
-          {ListFooterComponent}
-          {inTabScreen && <BottomSpacer type="bottomTab" />}
-        </>
-      }
     />;
   }
 
@@ -97,12 +82,6 @@ function List<T = any, F = false>(
         refreshControl: <RefreshControl {...{ refreshing, onRefresh }} />,
       })}
       ref={ref as ForwardedRef<FactoryListRef<T, false>>}
-      ListFooterComponent={
-        <>
-          {ListFooterComponent}
-          {inTabScreen && <BottomSpacer type="bottomTab" />}
-        </>
-      }
     />
   );
 }

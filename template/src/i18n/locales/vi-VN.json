@@ -4,8 +4,8 @@
     "confirm": "Xác nhận"
   },
   "permission": {
-    "camera": "Máy Ảnh",
-    "photoGallery": "Thư Viện Ảnh",
+    "@camera": "Máy Ảnh",
+    "@photoGallery": "Thư Viện Ảnh",
     "blockedTitle": "Quyền Truy Cập {{permissionName}} Đã Bị Chặn",
     "blockedMessage": "Vui lòng cấp quyền từ màn hình cài đặt để sử dụng tính năng này",
     "unavailableTitle": "Tính năng này không khả dụng trên thiết bị của bạn",

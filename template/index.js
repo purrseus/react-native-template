@@ -1,7 +1,4 @@
-import 'react-native-gesture-handler';
-import '@/core/declarations';
-import '@/i18n';
-import '@/utils/initial';
+import '@/initialization';
 
 import App from '@/App';
 import { AppRegistry } from 'react-native';

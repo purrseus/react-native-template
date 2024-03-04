@@ -55,8 +55,6 @@ global.duration = ({ d = 0, h = 0, m = 0, s = 0, ms = 0 }) => {
 
 global.wait = (timeout = ONE_SECOND) => new Promise(resolve => setTimeout(resolve, timeout));
 
-global.createAscendingOrderArray = (length = 0) => Array.from({ length }, (_, i) => i);
-
 export * from './array';
 export * from './number';
 export * from './object';

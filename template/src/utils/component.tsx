@@ -1,39 +1,44 @@
-import { OverlayLoadingMethods } from '@/core/interfaces';
 import {
   ComponentProps,
   ComponentType,
   JSXElementConstructor,
   PropsWithChildren,
-  createRef,
   memo,
 } from 'react';
 import isEqual from 'react-fast-compare';
 
-//#region buildProvidersTree
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Providers = readonly JSXElementConstructor<any>[];
+export namespace ProviderTree {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type Components = readonly JSXElementConstructor<any>[];
 
-type ProviderWithProps<A extends Providers> = {
-  [K in keyof A]: ComponentProps<A[K]> extends never
-    ? readonly [A[K]]
-    : readonly [A[K]] | readonly [A[K], Omit<ComponentProps<A[K]>, 'children'>];
-} & Pick<A, 'length'>;
+  type ProviderWithProps<Providers extends Components> = Pick<Providers, 'length'> & {
+    [Index in keyof Providers]: ComponentProps<Providers[Index]> extends never
+      ? readonly [Providers[Index]]
+      :
+          | readonly [Providers[Index]]
+          | readonly [Providers[Index], Omit<ComponentProps<Providers[Index]>, 'children'>];
+  };
 
-export function buildProvidersTree<A extends Providers>(providerWithProps: ProviderWithProps<A>) {
-  return ({ children }: PropsWithChildren) =>
-    providerWithProps.reduceRight(
-      (inner, [Provider, props = {}]) => <Provider {...props}>{inner}</Provider>,
-      children,
-    );
+  export function build<Providers extends Components>(
+    providerWithProps: ProviderWithProps<Providers>,
+  ) {
+    return ({ children }: PropsWithChildren) =>
+      providerWithProps.reduceRight(
+        (inner, [Provider, props = {}]) => <Provider {...props}>{inner}</Provider>,
+        children,
+      );
+  }
 }
-//#endregion
-
-export const overlayLoadingRef = createRef<OverlayLoadingMethods>();
-
-export const overlayLoading = {
-  show: () => overlayLoadingRef.current?.show(true),
-  hide: () => overlayLoadingRef.current?.show(false),
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const compareMemo = <T extends ComponentType<any>>(Component: T) => memo(Component, isEqual);
+export function withHook<H extends (...args: readonly any[]) => any>(
+  hook: H,
+  Component: (props: ReturnType<H>) => JSX.Element,
+) {
+  return (props: NonNullable<FirstParameter<H> | {}>) => <Component {...hook(props)} />;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function compareMemo<T extends ComponentType<any>>(Component: T) {
+  return memo(Component, isEqual);
+}

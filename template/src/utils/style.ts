@@ -1,19 +1,15 @@
 import config from '@/../tailwind.config';
-import { CommonSize } from '@/core/types';
+import { Theme } from '@/core/types';
+import { Appearance } from 'react-native';
 import { create } from 'twrnc';
+import { IOSKeyboardManager } from './keyboard';
 
-export const tailwind = create(config);
+export class TailwindService {
+  static tailwind = create(config);
 
-export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
-
-export const resizeImage = (
-  sizeType: 'width' | 'height',
-  expectSize: number,
-  currentWidth: number,
-  currentHeight: number,
-): CommonSize => {
-  if (!expectSize) return { width: 0, height: 0 };
-  const dimensionTarget = (sizeType === 'width' ? currentWidth : currentHeight) || 1;
-  const scale = expectSize / dimensionTarget;
-  return { width: currentWidth * scale, height: currentHeight * scale };
-};
+  static changeTheme(theme: Theme): void {
+    const colorScheme = theme === 'auto' ? Appearance.getColorScheme() ?? 'light' : theme;
+    TailwindService.tailwind.setColorScheme(colorScheme);
+    IOSKeyboardManager.changeKeyboardAppearance(colorScheme);
+  }
+}

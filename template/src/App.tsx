@@ -6,11 +6,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { OverlayLoading } from './components/core';
 import { StatusBar } from './layouts';
 import { RootNavigator } from './navigators';
-import { buildProvidersTree, navigationRef, overlayLoadingRef, queryClient } from './utils';
+import { ProviderTree, NavigationService, queryClient } from './utils';
 
-const AppProvider = buildProvidersTree([
+const AppProvider = ProviderTree.build([
   [QueryClientProvider, { client: queryClient }],
-  [NavigationContainer, { ref: navigationRef }],
+  [NavigationContainer, { ref: NavigationService.ref }],
   [SafeAreaProvider],
   [ActionSheetProvider],
   [GestureHandlerRootView, { style: { flex: 1 } }],
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <AppProvider>
       <StatusBar />
-      <OverlayLoading ref={overlayLoadingRef} />
+      <OverlayLoading.Component />
       <RootNavigator />
     </AppProvider>
   );

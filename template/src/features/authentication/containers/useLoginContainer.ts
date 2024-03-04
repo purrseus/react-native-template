@@ -1,10 +1,9 @@
 import { PublicScreenName } from '@/core/enums';
 import { PublicScreenProps } from '@/core/types';
 import { useAuthStore } from '@/stores';
-import isEqual from 'react-fast-compare';
 
 const useLoginContainer = ({ navigation }: PublicScreenProps<PublicScreenName.Login>) => {
-  const setTokens = useAuthStore(state => state.setTokens, isEqual);
+  const setTokens = useAuthStore(state => state.setTokens);
 
   const handleLogin = () => {
     setTokens({
